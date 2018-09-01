@@ -46,7 +46,7 @@
             android:gravity="center"/>
 
         <ImageView
-            android:id="@+id/iv_delete_item"
+            android:id="@+id/iv_delete_alarm"
             android:layout_width="0dp"
             android:layout_weight="1"
             android:layout_height="wrap_content"

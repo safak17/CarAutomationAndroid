@@ -2,6 +2,7 @@ package com.automation.CarAutomation.Controller;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.graphics.Color;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.ImageView;
@@ -17,77 +18,52 @@ import com.automation.CarAutomation.R;
 
 public class AlarmViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
-    SharedPreferencesContainer sharedPreferencesContainer = SharedPreferencesContainer.getInstance();
-    ArduinoVariableContainer arduinoVariableContainer = ArduinoVariableContainer.getInstance();
-    BluetoothContainer bluetoothContainer = BluetoothContainer.getInstance();
+    SharedPreferencesContainer sharedPreferencesContainer   = SharedPreferencesContainer.getInstance();
+    ArduinoVariableContainer arduinoVariableContainer       = ArduinoVariableContainer.getInstance();
+    BluetoothContainer bluetoothContainer                   = BluetoothContainer.getInstance();
 
-    private TextView tvAlarmTime;
-    private TextView tvAlarmLabel;
-    private TextView tvAlarmDay;
-    private TextView tvAlarmRelayLabel;
-    private TextView tvAlarmRelayStatus;
-
-    private ImageView ivRepeatedIcon;
+    private TextView tvAlarmRelayName;
+    private TextView tvDateTime;
     private ImageView ivDeleteIcon;
-
 
     public AlarmViewHolder(View itemView) {
         super(itemView);
 
-        tvAlarmTime = itemView.findViewById(R.id.tv_alarm_time);
-        tvAlarmLabel = itemView.findViewById(R.id.tv_alarm_label);
-        tvAlarmDay = itemView.findViewById(R.id.tv_alarm_day);
-        tvAlarmRelayLabel = itemView.findViewById(R.id.tv_alarm_relay_label);
-        tvAlarmRelayStatus = itemView.findViewById(R.id.tv_alarm_relay_status);
-
-        ivRepeatedIcon = itemView.findViewById(R.id.iv_repeated_icon);
-        ivDeleteIcon = itemView.findViewById(R.id.iv_delete_item);
+        tvAlarmRelayName    = itemView.findViewById(R.id.tv_relay_name);
+        tvDateTime          = itemView.findViewById(R.id.tv_date_time);
+        ivDeleteIcon        = itemView.findViewById(R.id.iv_delete_alarm);
         ivDeleteIcon.setOnClickListener(this);
     }
 
-    public void setUserInterfaceData(Alarm selectedAlarm) {
+    public void setUserInterfaceData(Alarm alarmItem) {
 
-        this.tvAlarmTime.setText(selectedAlarm.getDigitalClockFormat());
-        this.tvAlarmLabel.setText(selectedAlarm.alarmLabel);
+        String dateTime = alarmItem.getDigitalClockFormat();
+        String relayName = sharedPreferencesContainer.settings.getString( String.valueOf( R.id.sw_relay_1 + alarmItem.relayNumber -1 ), null);
 
-        if (selectedAlarm.repeat == 1)  ivRepeatedIcon.setImageResource(R.drawable.ic_repeat);
-        else                            ivRepeatedIcon.setImageResource(R.drawable.ic_non_repeated);
-
-
-        setTextViewAlarmDay(selectedAlarm.dayOfWeek);
-        tvAlarmRelayLabel.setText(sharedPreferencesContainer.settings.getString(String.valueOf(selectedAlarm.relayNumber-1), null));
+        this.tvAlarmRelayName.setText(relayName);
 
 
-        if (selectedAlarm.relayStatus == 1)
-            tvAlarmRelayStatus.setBackground(App.getContext().getResources().getDrawable(R.drawable.status_of_bluetooth_circle_connected));
-        else
-            tvAlarmRelayStatus.setBackground(App.getContext().getResources().getDrawable(R.drawable.status_of_bluetooth_circle_disconnected));
+        if (alarmItem.repeat == 1)  this.tvDateTime.setText(dateTime + "\nEvery " + getAlarmDay(alarmItem.dayOfWeek) );
+        else                        this.tvDateTime.setText(dateTime + "\nOnce only " + getAlarmDay(alarmItem.dayOfWeek) );
+
+
+
+        if (alarmItem.relayStatus == 1) tvAlarmRelayName.setBackgroundColor(Color.parseColor("#42BA16"));
+        else                            tvAlarmRelayName.setBackgroundColor(Color.parseColor("#ED3510"));
 
     }
-    private void setTextViewAlarmDay(int dayOfWeek) {
-        switch (dayOfWeek) {
-            case 1:
-                tvAlarmDay.setText("Monday");
-                break;
-            case 2:
-                tvAlarmDay.setText("Tuesday");
-                break;
-            case 3:
-                tvAlarmDay.setText("Wednesday");
-                break;
-            case 4:
-                tvAlarmDay.setText("Thursday");
-                break;
-            case 5:
-                tvAlarmDay.setText("Friday");
-                break;
-            case 6:
-                tvAlarmDay.setText("Saturday");
-                break;
-            case 7:
-                tvAlarmDay.setText("Sunday");
-                break;
-        }
+
+    private String getAlarmDay(int dayOfWeek) {
+
+        if( dayOfWeek == 1 )    return "Monday";
+        if( dayOfWeek == 2 )    return "Tuesday";
+        if( dayOfWeek == 3 )    return "Wednesday";
+        if( dayOfWeek == 4 )    return "Thursday";
+        if( dayOfWeek == 5 )    return "Friday";
+        if( dayOfWeek == 6 )    return "Saturday";
+        if( dayOfWeek == 7 )    return "Sunday";
+
+        return "null";
     }
 
 

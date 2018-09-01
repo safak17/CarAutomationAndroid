@@ -10,17 +10,6 @@
     android:padding="30dp">
 
     <!--    TODO: Cardview ekle.    -->
-    <EditText
-        android:id="@+id/edit_alarm_label"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_marginTop="16dp"
-        android:hint="Alarm Label"
-        android:maxLines="1"
-        android:paddingLeft="10dp"
-        android:paddingRight="10dp"
-        android:textSize="14sp" />
 
     <LinearLayout
         android:layout_width="match_parent"

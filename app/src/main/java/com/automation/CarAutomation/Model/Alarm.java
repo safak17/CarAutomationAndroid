@@ -12,8 +12,6 @@ public class Alarm {
     public int relayNumber;
     public int relayStatus;
 
-    public String alarmLabel;
-
 
     public Alarm(){}
 
@@ -29,8 +27,6 @@ public class Alarm {
         this.minute = Integer.valueOf(alarmProperties[4]);
         this.relayNumber = Integer.valueOf(alarmProperties[5]);
         this.relayStatus = Integer.valueOf(alarmProperties[6]);
-
-        this.alarmLabel = SharedPreferencesContainer.getInstance().settings.getString( String.valueOf(this.id), null);
     }
 
 

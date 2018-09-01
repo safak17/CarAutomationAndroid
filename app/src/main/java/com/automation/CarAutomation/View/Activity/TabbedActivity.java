@@ -3,7 +3,9 @@ package com.automation.CarAutomation.View.Activity;
 import com.automation.CarAutomation.Controller.App;
 import com.automation.CarAutomation.Model.BluetoothContainer;
 import com.automation.CarAutomation.R;
+import com.automation.CarAutomation.View.Fragment.AlarmFragment;
 import com.automation.CarAutomation.View.Fragment.DashboardFragment;
+import com.automation.CarAutomation.View.Fragment.SettingsFragment;
 
 import android.content.Intent;
 import android.os.Handler;
@@ -63,6 +65,7 @@ public class TabbedActivity extends AppCompatActivity {
                 }
 
                 else if ( tab.getText().equals("Alarm")) {
+                    startTimer("al ;", 5000);
                     fabAddAlarm.setVisibility(View.VISIBLE);
                 }
 
@@ -154,10 +157,10 @@ public class TabbedActivity extends AppCompatActivity {
             switch (position) {
                 case 0:
                     return new DashboardFragment();
-/*                case 1:
+                case 1:
                     return new AlarmFragment();
                 case 2:
-                    return new SettingsFragment();*/
+                    return new SettingsFragment();
                 default:
                     return null;
             }
@@ -200,6 +203,4 @@ public class TabbedActivity extends AppCompatActivity {
             }
         };
     }
-
-
 }

@@ -1,109 +1,119 @@
 package com.automation.CarAutomation.View.Fragment;
 
-import android.content.Context;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.TextView;
 
+import com.automation.CarAutomation.Model.BluetoothContainer;
+import com.automation.CarAutomation.Model.SharedPreferencesContainer;
 import com.automation.CarAutomation.R;
 
-/**
- * A simple {@link Fragment} subclass.
- * Activities that contain this fragment must implement the
- * {@link SettingsFragment.OnFragmentInteractionListener} interface
- * to handle interaction events.
- * Use the {@link SettingsFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
-public class SettingsFragment extends Fragment {
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
+import java.util.Calendar;
 
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
+public class SettingsFragment extends Fragment {public SettingsFragment() { }
 
-    private OnFragmentInteractionListener mListener;
+    View rootView;
 
-    public SettingsFragment() {
-        // Required empty public constructor
-    }
+    SharedPreferencesContainer sharedPreferencesContainer   = SharedPreferencesContainer.getInstance();
+    BluetoothContainer bluetoothContainer                   = BluetoothContainer.getInstance();
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment SettingsFragment.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static SettingsFragment newInstance(String param1, String param2) {
-        SettingsFragment fragment = new SettingsFragment();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
-    }
+    //  TODO: SharedPreferences kaydedilmesi.
+    public TextView tvRealtimeClock;
+    TextView tvTemperature, tvCurrent, tvVoltage;
+    EditText editTextList[] = new EditText[9];
+    Button btnSyncRealtimeClock;
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+
+        rootView = inflater.inflate(R.layout.fragment_settings, container, false);
+
+        initTextViews();
+        initEditTexts();
+
+        btnSyncRealtimeClock = rootView.findViewById(R.id.btn_sync_rtc);
+        btnSyncRealtimeClock.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) { syncRealtimeClock(); }
+        });
+
+        return rootView;
+    } // onCreateView
+
+    public void syncRealtimeClock() {
+
+        //  Get the Android's time.
+        Calendar calendar = Calendar.getInstance();
+
+        String setClockMessage = "cs "
+                + calendar.get(Calendar.YEAR) + " "
+                + (calendar.get(Calendar.MONTH) + 1) + " "
+                + calendar.get(Calendar.DATE) + " "
+                + calendar.get(Calendar.HOUR_OF_DAY) + " "
+                + calendar.get(Calendar.MINUTE) + " "
+                + calendar.get(Calendar.SECOND) + " ;";
+
+        bluetoothContainer.bluetoothCommunicationThread.write(setClockMessage);
+    }
+
+    public void setEditTextFromSharedPreferences() {
+
+        for( final EditText editText : editTextList ){
+
+            String sharedPreferencesKey = String.valueOf(editText.getId());
+
+            if( editText.getTag().toString().startsWith("unit"))
+                editText.setText(sharedPreferencesContainer.settings.getString(sharedPreferencesKey, "Unit"));
+            else
+                editText.setText(String.valueOf(sharedPreferencesContainer.settings.getFloat(sharedPreferencesKey, 0.0f)));
         }
     }
 
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_settings, container, false);
+    private void initTextViews(){
+        tvTemperature = rootView.findViewById(R.id.tv_settings_temperature);
+        tvCurrent = rootView.findViewById(R.id.tv_settings_current);
+        tvVoltage = rootView.findViewById(R.id.tv_settings_voltage);
+        tvRealtimeClock = rootView.findViewById(R.id.tv_realtime_clock);
     }
 
-    // TODO: Rename method, update argument and hook method into UI event
-    public void onButtonPressed(Uri uri) {
-        if (mListener != null) {
-            mListener.onFragmentInteraction(uri);
-        }
-    }
+    private void initEditTexts()
+    {
+        editTextList[0] = rootView.findViewById(R.id.et_a_value_temperature);
+        editTextList[1] = rootView.findViewById(R.id.et_b_value_temperature);
+        editTextList[2] = rootView.findViewById(R.id.editText_temperature_unit);
 
-    @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
-        if (context instanceof OnFragmentInteractionListener) {
-            mListener = (OnFragmentInteractionListener) context;
-        } else {
-            throw new RuntimeException(context.toString()
-                    + " must implement OnFragmentInteractionListener");
-        }
-    }
+        editTextList[3] = rootView.findViewById(R.id.et_a_value_current);
+        editTextList[4] = rootView.findViewById(R.id.et_b_value_current);
+        editTextList[5] = rootView.findViewById(R.id.editText_current_unit);
 
-    @Override
-    public void onDetach() {
-        super.onDetach();
-        mListener = null;
-    }
+        editTextList[6] = rootView.findViewById(R.id.et_a_value_voltage);
+        editTextList[7] = rootView.findViewById(R.id.et_b_value_voltage);
+        editTextList[8] = rootView.findViewById(R.id.editText_voltage_unit);
 
-    /**
-     * This interface must be implemented by activities that contain this
-     * fragment to allow an interaction in this fragment to be communicated
-     * to the activity and potentially other fragments contained in that
-     * activity.
-     * <p>
-     * See the Android Training lesson <a href=
-     * "http://developer.android.com/training/basics/fragments/communicating.html"
-     * >Communicating with Other Fragments</a> for more information.
-     */
-    public interface OnFragmentInteractionListener {
-        // TODO: Update argument type and name
-        void onFragmentInteraction(Uri uri);
+
+        for( final EditText editText : editTextList )
+            editText.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+                @Override
+                public void onFocusChange(View view, boolean focus) {
+                    if(!focus) {
+
+                        String sharedPreferencesKey = String.valueOf(editText.getId());
+
+                        if( editText.getTag().toString().startsWith("unit"))
+                            sharedPreferencesContainer.editor.putString( sharedPreferencesKey, editText.getText().toString());
+                        else
+                            sharedPreferencesContainer.editor.putFloat( sharedPreferencesKey, Float.valueOf(editText.getText().toString()));
+
+                        sharedPreferencesContainer.editor.commit();
+                    }
+                }
+            });
+
+        setEditTextFromSharedPreferences();
     }
 }
