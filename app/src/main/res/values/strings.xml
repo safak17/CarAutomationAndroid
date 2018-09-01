@@ -1,0 +1,38 @@
+<resources>
+    <string name="app_name">Car</string>
+    <string name="tab_text_1">Tab 1</string>
+    <string name="tab_text_2">Tab 2</string>
+    <string name="tab_text_3">Tab 3</string>
+    <string name="action_settings">Settings</string>
+    <string name="section_format">Hello World from section: %1$d</string>
+
+    <string name="cb_alarm_repeat">Repeat</string>
+    <string name="cb_relay_on">On</string>
+    <string name="cb_relay_off">Off</string>
+    <string-array name="days_of_week">
+        <item>Monday</item>
+        <item>Tuesday</item>
+        <item>Wednesday</item>
+        <item>Thursday</item>
+        <item>Friday</item>
+        <item>Saturday</item>
+        <item>Sunday</item>
+    </string-array>
+
+    <string name="dashboard_default_sensor_value">N/A</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+
+    <string name="settings_analog_pin_temperature_label">Temperature</string>
+    <string name="settings_analog_pin_current_label">Current</string>
+    <string name="settings_analog_pin_voltage_label">Voltage</string>
+
+    <string name="settings_a_value_label" translatable="false">a</string>
+    <string name="settings_b_value_label" translatable="false">b</string>
+
+    <string name="settings_unit_label">Unit</string>
+
+
+</resources>

@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".View.View.Activity.AlarmActivity"
+    android:padding="30dp">
+
+    <!--    TODO: Cardview ekle.    -->
+    <EditText
+        android:id="@+id/edit_alarm_label"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="16dp"
+        android:hint="Alarm Label"
+        android:maxLines="1"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:textSize="14sp" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/btn_time_picker"
+            style="@style/Widget.AppCompat.Button.Colored"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+
+            android:layout_gravity="center|center_vertical"
+            android:textSize="20sp"
+            android:text="20:50" />
+
+        <Spinner
+            android:id="@+id/spinner_days_of_week"
+            android:layout_width="0dp"
+            android:layout_weight="2"
+            android:layout_height="wrap_content"
+
+            android:layout_gravity="center|center_vertical"
+            android:entries="@array/days_of_week"
+            android:spinnerMode="dropdown" />
+
+        <CheckBox
+            android:id="@+id/cb_alarm_repeat"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+
+            android:layout_gravity="start|center_vertical"
+            android:gravity="center"
+            android:text="@string/cb_alarm_repeat"
+            android:textSize="14sp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:orientation="horizontal">
+
+        <Spinner
+            android:id="@+id/spinner_relay_name"
+            android:layout_width="0dp"
+            android:layout_weight="3"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center|center_vertical"
+            android:spinnerMode="dropdown"
+            />
+        <CheckBox
+            android:id="@+id/cb_relay_status"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:layout_gravity="start|center_vertical"
+            android:gravity="center"
+            android:text="@string/cb_relay_off"
+            android:textSize="14sp" />
+
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/btn_save_alarm"
+        style="@style/Widget.AppCompat.Button.Colored"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Save"
+        android:textAlignment="center"
+        android:textSize="14sp" />
+</LinearLayout>
+
