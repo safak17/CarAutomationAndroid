@@ -1,102 +1,135 @@
 package com.automation.CarAutomation.View.Activity;
 
+import com.automation.CarAutomation.Controller.App;
+import com.automation.CarAutomation.Model.BluetoothContainer;
+import com.automation.CarAutomation.R;
+import com.automation.CarAutomation.View.Fragment.DashboardFragment;
+
+import android.content.Intent;
+import android.os.Handler;
 import android.support.design.widget.TabLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
 
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
-import android.widget.TextView;
+import java.io.IOException;
+import java.util.Timer;
+import java.util.TimerTask;
 
-import com.automation.CarAutomation.R;
 
 public class TabbedActivity extends AppCompatActivity {
 
-    /**
-     * The {@link android.support.v4.view.PagerAdapter} that will provide
-     * fragments for each of the sections. We use a
-     * {@link FragmentPagerAdapter} derivative, which will keep every
-     * loaded fragment in memory. If this becomes too memory intensive, it
-     * may be best to switch to a
-     * {@link android.support.v4.app.FragmentStatePagerAdapter}.
-     */
-    private SectionsPagerAdapter mSectionsPagerAdapter;
 
-    /**
-     * The {@link ViewPager} that will host the section contents.
-     */
-    private ViewPager mViewPager;
+    BluetoothContainer bluetoothContainer = BluetoothContainer.getInstance();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tabbed);
 
-        // Create the adapter that will return a fragment for each of the three
-        // primary sections of the activity.
-        mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
 
-        // Set up the ViewPager with the sections adapter.
-        mViewPager = (ViewPager) findViewById(R.id.container);
+        SectionsPagerAdapter mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
+        ViewPager mViewPager = findViewById(R.id.container);
         mViewPager.setAdapter(mSectionsPagerAdapter);
 
-        TabLayout tabLayout = (TabLayout) findViewById(R.id.tabs);
+        final FloatingActionButton fabAddAlarm = findViewById(R.id.fab_add_alarm);
+        fabAddAlarm.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent( TabbedActivity.this , AlarmActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        TabLayout tabLayout = findViewById(R.id.tabs);
+        tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
+            @Override
+            public void onTabSelected(TabLayout.Tab tab) {
+
+                stoptimertask();
+
+                if ( tab.getText().equals("Dashboard") ) {
+                    startTimer("pg ;", 5000);
+                }
+
+                else if ( tab.getText().equals("Alarm")) {
+                    fabAddAlarm.setVisibility(View.VISIBLE);
+                }
+
+                else if ( tab.getText().equals("Settıngs") )
+                    startTimer("cg ;", 1000);
+
+            }
+
+            @Override
+            public void onTabUnselected(TabLayout.Tab tab) {
+                if( tab.getText().equals("Alarm"))
+                    fabAddAlarm.setVisibility(View.GONE);
+
+            }
+
+            @Override
+            public void onTabReselected(TabLayout.Tab tab) { }
+        });
+
 
         mViewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
         tabLayout.addOnTabSelectedListener(new TabLayout.ViewPagerOnTabSelectedListener(mViewPager));
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab_add_alarm);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
+
 
     }
-
 
     @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_tabbed, menu);
-        return true;
+    protected void onPause() {
+        super.onPause();
+        Log.i("TABBED_ACTIVITY", "onPause");
     }
 
-    /**
-     * A placeholder fragment containing a simple view.
-     */
+    @Override
+    protected void onStop() {
+        super.onStop();
+        Log.i("TABBED_ACTIVITY", "onStop");
+    }
+
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+        Log.i("TABBED_ACTIVITY", "onRestart");
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        Log.i("TABBED_ACTIVITY", "onStart");
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        Log.i("TABBED_ACTIVITY", "onDestroy");
+        try {
+            bluetoothContainer.bluetoothSocket.close();
+        } catch (IOException e) { e.printStackTrace(); }
+    }
+
     public static class PlaceholderFragment extends Fragment {
-        /**
-         * The fragment argument representing the section number for this
-         * fragment.
-         */
-        private static final String ARG_SECTION_NUMBER = "section_number";
 
-        public PlaceholderFragment() {
-        }
+        public PlaceholderFragment() { }
 
-        /**
-         * Returns a new instance of this fragment for the given section
-         * number.
-         */
+
         public static PlaceholderFragment newInstance(int sectionNumber) {
             PlaceholderFragment fragment = new PlaceholderFragment();
-            Bundle args = new Bundle();
-            args.putInt(ARG_SECTION_NUMBER, sectionNumber);
-            fragment.setArguments(args);
             return fragment;
         }
 
@@ -108,10 +141,7 @@ public class TabbedActivity extends AppCompatActivity {
         }
     }
 
-    /**
-     * A {@link FragmentPagerAdapter} that returns a fragment corresponding to
-     * one of the sections/tabs/pages.
-     */
+
     public class SectionsPagerAdapter extends FragmentPagerAdapter {
 
         public SectionsPagerAdapter(FragmentManager fm) {
@@ -120,15 +150,56 @@ public class TabbedActivity extends AppCompatActivity {
 
         @Override
         public Fragment getItem(int position) {
-            // getItem is called to instantiate the fragment for the given page.
-            // Return a PlaceholderFragment (defined as a static inner class below).
-            return PlaceholderFragment.newInstance(position + 1);
+
+            switch (position) {
+                case 0:
+                    return new DashboardFragment();
+/*                case 1:
+                    return new AlarmFragment();
+                case 2:
+                    return new SettingsFragment();*/
+                default:
+                    return null;
+            }
         }
 
         @Override
-        public int getCount() {
-            // Show 3 total pages.
-            return 3;
+        public int getCount() { return 3; }
+    }
+
+    //  TODO: Başka bir sınıf yazılabilir.
+    Timer timer;
+    TimerTask timerTask;
+    public void startTimer(String arduinoCommand, int periodInMilliseconds) {
+        timer = new Timer();
+
+        initializeTimerTask(arduinoCommand);
+
+        timer.schedule(timerTask, 0, periodInMilliseconds);
+    }
+
+    public void stoptimertask() {
+        if (timer != null) {
+            timer.cancel();
+            timer = null;
         }
     }
+
+    //  We are going to use a handler to be able to run in our TimerTask
+    final Handler handler = new Handler();
+    public void initializeTimerTask(final String arduinoCommand) {
+
+        timerTask = new TimerTask() {
+            public void run() {
+
+                handler.post(new Runnable() {
+                    public void run() {
+                        bluetoothContainer.bluetoothCommunicationThread.write(arduinoCommand);
+                    }
+                });
+            }
+        };
+    }
+
+
 }

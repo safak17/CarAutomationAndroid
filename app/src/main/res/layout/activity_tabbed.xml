@@ -16,21 +16,8 @@
         android:paddingTop="@dimen/appbar_padding_top"
         android:theme="@style/AppTheme.AppBarOverlay">
 
-        <android.support.v7.widget.Toolbar
-            android:id="@+id/toolbar"
-            android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize"
-            android:layout_weight="1"
-            android:background="?attr/colorPrimary"
-            app:layout_scrollFlags="scroll|enterAlways"
-            app:popupTheme="@style/AppTheme.PopupOverlay"
-            app:title="@string/app_name">
-
-        </android.support.v7.widget.Toolbar>
-
         <android.support.design.widget.TabLayout
             android:id="@+id/tabs"
-            app:tabTextAppearance="@style/TabItemText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
@@ -40,12 +27,6 @@
                 android:layout_height="wrap_content"
 
                 android:text="@string/tab_item_dashboard_text" />
-
-            <android.support.design.widget.TabItem
-                android:id="@+id/tabItemBluetooth"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/tab_item_bluetooth_text" />
 
             <android.support.design.widget.TabItem
                 android:id="@+id/tabItemAlarm"
@@ -74,7 +55,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|end"
         android:layout_margin="20dp"
-        android:visibility="visible"
+        android:visibility="gone"
         android:src="@drawable/ic_alarm_add_white" />
 
 
