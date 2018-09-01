@@ -1,8 +1,9 @@
 package com.automation.CarAutomation.View.Activity;
 
+import android.app.Activity;
 import android.bluetooth.BluetoothDevice;
+import android.content.DialogInterface;
 import android.support.v7.app.AlertDialog;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -15,11 +16,12 @@ import com.automation.CarAutomation.Controller.App;
 import com.automation.CarAutomation.Model.BluetoothContainer;
 import com.automation.CarAutomation.R;
 
-public class PairedDevicesActivity extends AppCompatActivity {
+public class PairedDevicesActivity extends Activity {
 
     static BluetoothContainer bluetoothContainer = BluetoothContainer.getInstance();
-     ListView lvPairedDevicesList;
-     Button btnPairedDevicesList;
+    ListView lvPairedDevicesList;
+    Button btnPairedDevicesList;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,8 +47,9 @@ public class PairedDevicesActivity extends AppCompatActivity {
                 BluetoothDevice bluetoothDevice = (BluetoothDevice) lvPairedDevicesList.getItemAtPosition(position);
 
                 if( bluetoothContainer.connectKnownBluetoothDevice(bluetoothDevice.getAddress()) )
-                    Toast.makeText(App.getContext(), "Doğru", Toast.LENGTH_LONG);
-                Log.e("asd", "2");
+                    Toast.makeText(App.getContext(), "Connection established.", Toast.LENGTH_LONG).show();
+                else
+                    Toast.makeText(App.getContext(), "Connection failed.", Toast.LENGTH_LONG).show();
             }
         });
 
@@ -59,7 +62,7 @@ public class PairedDevicesActivity extends AppCompatActivity {
         Log.e("RESUME", "1");
 
         if( ! bluetoothContainer.bluetoothAdapter.isEnabled() )
-            Toast.makeText(this, "Bluetooth must be enabled!", Toast.LENGTH_LONG).show();
+            displayAlertDialog();
 
         showPairedDevicesList();
     }
@@ -70,25 +73,35 @@ public class PairedDevicesActivity extends AppCompatActivity {
         Log.e("PAUSE", "2");
     }
 
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        Log.e("DESTROY", "2");
+    }
+
     private void showPairedDevicesList() {
         lvPairedDevicesList.setAdapter(bluetoothContainer.getPairedBluetoothDeviceAdapter(this));
     }
 
 
-    private void displayAlertDialog() {
+    public void displayAlertDialog() {
 
-        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(App.getContext());
+        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder( this );
 
         alertDialogBuilder.setTitle("Warning!");
 
         alertDialogBuilder
                 .setMessage("Bluetooth must be enabled !")
                 .setCancelable(true)
-                .setIcon(R.drawable.ic_warning_black);
-
+                .setIcon(R.drawable.ic_warning_black)
+                .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        finish();
+                    }
+                });
 
         AlertDialog alertDialog = alertDialogBuilder.create();
         alertDialog.show();
     }
-
 }

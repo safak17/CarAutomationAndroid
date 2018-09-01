@@ -9,15 +9,19 @@ import android.bluetooth.BluetoothDevice;
 import android.bluetooth.BluetoothSocket;
 import android.content.BroadcastReceiver;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.Build;
 import android.os.Handler;
 import android.os.Message;
 import android.support.v4.app.ActivityCompat;
+import android.support.v7.app.AlertDialog;
 
+import com.automation.CarAutomation.Controller.App;
 import com.automation.CarAutomation.Controller.BluetoothCommunicationThread;
 import com.automation.CarAutomation.Controller.BluetoothDeviceAdapter;
+import com.automation.CarAutomation.R;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -116,7 +120,7 @@ public class BluetoothContainer {
         try {
             bluetoothSocket = bluetoothDevice.createRfcommSocketToServiceRecord(myUUID);
             bluetoothSocket.connect();
-            return true;
+            return bluetoothSocket.isConnected();
         } catch (IOException e) { return false; }
     }//end connectKnownBluetoothDevice()
 
@@ -142,6 +146,7 @@ public class BluetoothContainer {
             }
         }
     };
+
 
 
 
