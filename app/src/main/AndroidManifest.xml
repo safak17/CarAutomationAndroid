@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!--suppress ALL -->
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.automation.CarAutomation">
 
@@ -9,14 +10,25 @@
 
     <!-- TODO: android:icon değiştirilecek. -->
     <application
+        android:name=".Controller.App"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
 
+        <receiver android:name=".Controller.BluetoothBroadcastReceiver" android:enabled="true">
+            <intent-filter>
+                <action android:name="android.bluetooth.device.action.ACL_CONNECTED" />
+                <action android:name="android.bluetooth.device.action.ACL_DISCONNECTED" />
+                <action android:name="android.bluetooth.adapter.action.STATE_CHANGED" />
+                <action android:name="android.bluetooth.adapter.action.STATE_ON"/>
+                <action android:name="android.bluetooth.adapter.action.STATE_OFF"/>
+            </intent-filter>
+        </receiver>
+
         <activity
-            android:name=".View.View.Activity.PairedDevicesActivity"
+            android:name=".View.Activity.PairedDevicesActivity"
             android:configChanges="orientation"
             android:screenOrientation="portrait">
             <intent-filter>
@@ -27,13 +39,13 @@
         </activity>
 
         <activity
-            android:name=".View.View.Activity.TabbedActivity"
+            android:name=".View.Activity.TabbedActivity"
             android:configChanges="orientation"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar"/>
 
         <activity
-            android:name=".View.View.Activity.AlarmActivity"
+            android:name=".View.Activity.AlarmActivity"
             android:configChanges="orientation"
             android:screenOrientation="portrait"/>
     </application>

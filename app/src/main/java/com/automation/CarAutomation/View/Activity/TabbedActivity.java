@@ -1,4 +1,4 @@
-package com.automation.CarAutomation.View.View.Activity;
+package com.automation.CarAutomation.View.Activity;
 
 import android.support.design.widget.TabLayout;
 import android.support.design.widget.FloatingActionButton;

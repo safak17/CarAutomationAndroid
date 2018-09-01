@@ -1,4 +1,4 @@
-package com.automation.CarAutomation.View.View.Activity;
+package com.automation.CarAutomation.View.Activity;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;

@@ -5,13 +5,14 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".View.View.Activity.PairedDevicesActivity">
+    tools:context=".View.Activity.PairedDevicesActivity">
 
-    <TextView
+    <Button
+        android:id="@+id/btn_paired_devices_list"
         android:layout_width="match_parent"
         android:layout_height="50dp"
 
-        tools:text="Paired Devices List"
+        android:text="Paired Devices List"
         android:textSize="20sp"
         android:textColor="@android:color/white"
         android:gravity="center"
@@ -19,6 +20,7 @@
         android:background="@color/colorPrimary"/>
 
     <ListView
+        android:id="@+id/lv_paired_devices_list"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
 
