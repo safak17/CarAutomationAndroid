@@ -15,6 +15,10 @@
         <item name="windowNoTitle">true</item>
     </style>
 
+    <style name="TabItemText" parent="TextAppearance.Design.Tab">
+        <item name="android:textSize">10sp</item>
+    </style>
+
     <style name="AppTheme.AppBarOverlay" parent="Theme.AppCompat.Light" />
 
     <style name="AppTheme.PopupOverlay" parent="Theme.AppCompat.Light" />

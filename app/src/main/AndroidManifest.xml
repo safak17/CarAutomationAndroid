@@ -31,7 +31,8 @@
             android:name=".View.Activity.PairedDevicesActivity"
             android:theme="@style/Theme.AppCompat.Light"
             android:configChanges="orientation"
-            android:screenOrientation="portrait">
+            android:screenOrientation="portrait"
+            android:launchMode="singleInstance">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -43,12 +44,14 @@
             android:name=".View.Activity.TabbedActivity"
             android:configChanges="orientation"
             android:screenOrientation="portrait"
-            android:theme="@style/Theme.AppCompat.Light"/>
+            android:theme="@style/Theme.AppCompat.Light"
+            android:launchMode="singleInstance"/>
 
         <activity
             android:name=".View.Activity.AlarmActivity"
             android:configChanges="orientation"
-            android:screenOrientation="portrait"/>
+            android:screenOrientation="portrait"
+            android:launchMode="singleInstance"/>
     </application>
 
 </manifest>

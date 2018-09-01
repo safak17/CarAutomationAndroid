@@ -6,6 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context=".View.Activity.TabbedActivity">
 
     <android.support.design.widget.AppBarLayout
@@ -29,26 +30,34 @@
 
         <android.support.design.widget.TabLayout
             android:id="@+id/tabs"
+            app:tabTextAppearance="@style/TabItemText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
             <android.support.design.widget.TabItem
-                android:id="@+id/tabItem"
+                android:id="@+id/tabItemDashboard"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/tab_text_1" />
+
+                android:text="@string/tab_item_dashboard_text" />
 
             <android.support.design.widget.TabItem
-                android:id="@+id/tabItem2"
+                android:id="@+id/tabItemBluetooth"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/tab_text_2" />
+                android:text="@string/tab_item_bluetooth_text" />
 
             <android.support.design.widget.TabItem
-                android:id="@+id/tabItem3"
+                android:id="@+id/tabItemAlarm"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/tab_text_3" />
+                android:text="@string/tab_item_alarm_text" />
+
+            <android.support.design.widget.TabItem
+                android:id="@+id/tabItemSettings"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/tab_item_settings_text" />
 
         </android.support.design.widget.TabLayout>
     </android.support.design.widget.AppBarLayout>
@@ -60,11 +69,13 @@
         app:layout_behavior="@string/appbar_scrolling_view_behavior" />
 
     <android.support.design.widget.FloatingActionButton
-        android:id="@+id/fab"
+        android:id="@+id/fab_add_alarm"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="end|bottom"
-        android:layout_margin="@dimen/fab_margin"
-        app:srcCompat="@android:drawable/ic_dialog_email" />
+        android:layout_gravity="bottom|end"
+        android:layout_margin="20dp"
+        android:visibility="visible"
+        android:src="@drawable/ic_alarm_add_white" />
+
 
 </android.support.design.widget.CoordinatorLayout>

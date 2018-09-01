@@ -1,10 +1,9 @@
 <resources>
-    <string name="app_name">Car</string>
-    <string name="tab_text_1">Tab 1</string>
-    <string name="tab_text_2">Tab 2</string>
-    <string name="tab_text_3">Tab 3</string>
-    <string name="action_settings">Settings</string>
-    <string name="section_format">Hello World from section: %1$d</string>
+    <string name="app_name">CarAutomation</string>
+    <string name="tab_item_dashboard_text">Dashboard</string>
+    <string name="tab_item_bluetooth_text">Bluetooth</string>
+    <string name="tab_item_alarm_text">Alarm</string>
+    <string name="tab_item_settings_text">Settıngs</string>
 
     <string name="cb_alarm_repeat">Repeat</string>
     <string name="cb_relay_on">On</string>

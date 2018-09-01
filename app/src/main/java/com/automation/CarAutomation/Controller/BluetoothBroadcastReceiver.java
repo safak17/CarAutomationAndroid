@@ -17,6 +17,9 @@ public class BluetoothBroadcastReceiver extends BroadcastReceiver {
 
     BluetoothContainer bluetoothContainer = BluetoothContainer.getInstance();
 
+    final String pairedDevicesActivity      = "com.automation.CarAutomation.View.Activity.PairedDevicesActivity";
+    final String tabbedActivity             = "com.automation.CarAutomation.View.Activity.TabbedActivity";
+
     @Override
     public void onReceive(Context context, Intent intent) {
 
@@ -26,6 +29,7 @@ public class BluetoothBroadcastReceiver extends BroadcastReceiver {
                 bluetoothContainer.bluetoothCommunicationThread = new BluetoothCommunicationThread(bluetoothContainer.bluetoothSocket);
                 bluetoothContainer.bluetoothCommunicationThread.start();
                 bluetoothContainer.bluetoothCommunicationThread.write("al ;");
+                showActivity(context, tabbedActivity);
             }catch (Exception e){
                 Log.e("First Pair", "1");
             }
@@ -39,6 +43,7 @@ public class BluetoothBroadcastReceiver extends BroadcastReceiver {
                 bluetoothContainer.bluetoothCommunicationThread.cancel();
                 Log.e("DISCONNECTED", "KAPANDI");
                 Toast.makeText(context, "Bluetoth Disconnected ! ", Toast.LENGTH_LONG).show();
+                showActivity(context, pairedDevicesActivity);
             }catch (Exception e) { }
         }
         else if ( "android.bluetooth.adapter.action.STATE_CHANGED".equals(intent.getAction())) {
@@ -50,14 +55,14 @@ public class BluetoothBroadcastReceiver extends BroadcastReceiver {
 
             if ( state == BluetoothAdapter.STATE_OFF){
                 Log.e("STATE_OFF", "1");
-                showPairedDevicesActivityIntent(context);
+                showActivity(context, pairedDevicesActivity);
             }
         }
     }
 
-    private void showPairedDevicesActivityIntent(Context context){
+    private void showActivity(Context context, final String className){
         Intent i = new Intent();
-        i.setClassName("com.automation.CarAutomation", "com.automation.CarAutomation.View.Activity.PairedDevicesActivity");
+        i.setClassName("com.automation.CarAutomation", className);
         i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         context.startActivity(i);
     }
