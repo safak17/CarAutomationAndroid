@@ -74,17 +74,6 @@ public class DashboardFragment extends Fragment {
         }// for
     } // initSwitchCompatOfRelays()
 
-    public void setRelaysTextView() {
-
-        //  TODO: getId ne döndürüyor dene.
-        for (int textViewId = R.id.tv_relay_1; textViewId <= R.id.tv_relay_4; textViewId++) {
-
-            TextView tvRelayLabel = rootView.findViewById( textViewId );
-            String sharedPreferenceKey = String.valueOf( textViewId );
-            tvRelayLabel.setText(sharedPreferencesContainer.settings.getString(sharedPreferenceKey , "Relay" + textViewId));
-        }
-
-    }// setRelaysTextView()
 
     private void initTextViewOfRelays()
     {
@@ -105,12 +94,35 @@ public class DashboardFragment extends Fragment {
         setRelaysTextView();
     }// initTextViewOfRelays
 
+    public void setRelaysTextView() {
+
+        //  TODO: getId ne döndürüyor dene.
+        for (int textViewId = R.id.tv_relay_1; textViewId <= R.id.tv_relay_4; textViewId++) {
+
+            TextView tvRelayLabel           = rootView.findViewById( textViewId );
+            String sharedPreferenceKey      = String.valueOf( textViewId );
+            String sharedPreferenceValue    = sharedPreferencesContainer.settings.getString(sharedPreferenceKey, null);
+
+            if( TextUtils.isEmpty(sharedPreferenceValue) ){
+                sharedPreferencesContainer.editor.putString(sharedPreferenceKey, tvRelayLabel.getText().toString());
+                sharedPreferencesContainer.editor.commit();
+            }
+
+            else
+                tvRelayLabel.setText( sharedPreferencesContainer.settings.getString(sharedPreferenceKey, null) );
+
+        }
+
+    }// setRelaysTextView()
+
+
+
     private void displayAlertDialogForEditingRelayLabel(final int relayTextViewId)
     {
 
-        final EditText etRelayLabel = new EditText( App.getContext() );
+        final EditText etRelayLabel = new EditText( getContext() );
 
-        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(App.getContext());
+        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder( getContext() );
         alertDialogBuilder.setTitle("Edit Relay Label!")
                 .setView(etRelayLabel)
                 .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
@@ -122,13 +134,13 @@ public class DashboardFragment extends Fragment {
                         String newLabel = etRelayLabel.getText().toString();
 
                         if (TextUtils.isEmpty( newLabel ))
-                            Toast.makeText(getActivity().getApplicationContext(), "Enter Label Name !", Toast.LENGTH_LONG).show();
+                            Toast.makeText( getContext(), "Enter Label Name !", Toast.LENGTH_LONG).show();
 
                         else {
                             sharedPreferencesContainer.editor.putString(String.valueOf(relayTextViewId), newLabel);
                             sharedPreferencesContainer.editor.apply();
 
-                            Toast.makeText(getActivity().getApplicationContext(), "Saved Successfully", Toast.LENGTH_LONG).show();
+                            Toast.makeText( getContext(), "Saved Successfully", Toast.LENGTH_LONG).show();
                             ((TextView)rootView.findViewById( relayTextViewId )).setText(newLabel);
                             setRelaysTextView();
                             dialog.dismiss();

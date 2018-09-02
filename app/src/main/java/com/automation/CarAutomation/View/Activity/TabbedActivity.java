@@ -2,11 +2,13 @@ package com.automation.CarAutomation.View.Activity;
 
 import com.automation.CarAutomation.Controller.App;
 import com.automation.CarAutomation.Model.BluetoothContainer;
+import com.automation.CarAutomation.Model.SharedPreferencesContainer;
 import com.automation.CarAutomation.R;
 import com.automation.CarAutomation.View.Fragment.AlarmFragment;
 import com.automation.CarAutomation.View.Fragment.DashboardFragment;
 import com.automation.CarAutomation.View.Fragment.SettingsFragment;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Handler;
 import android.support.design.widget.TabLayout;
@@ -33,6 +35,7 @@ public class TabbedActivity extends AppCompatActivity {
 
 
     BluetoothContainer bluetoothContainer = BluetoothContainer.getInstance();
+    SharedPreferencesContainer sharedPreferencesContainer = SharedPreferencesContainer.getInstance();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -89,7 +92,9 @@ public class TabbedActivity extends AppCompatActivity {
         mViewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
         tabLayout.addOnTabSelectedListener(new TabLayout.ViewPagerOnTabSelectedListener(mViewPager));
 
-
+        // TODO : Class'ın içinw alınabiliir mi SharedPreferencesContainer
+        sharedPreferencesContainer.settings = this.getSharedPreferences("settings", Context.MODE_PRIVATE);
+        sharedPreferencesContainer.editor = sharedPreferencesContainer.settings.edit();
 
     }
 

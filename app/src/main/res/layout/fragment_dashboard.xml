@@ -253,7 +253,6 @@
                     android:rotation="270"
                     android:textOff=""
                     android:textOn=""
-                    android:enabled="false"
                     android:tag="1"
                     android:thumb="@drawable/design_of_switch_thumb" />
 
@@ -279,7 +278,6 @@
                     android:padding="8dp"
                     android:rotation="270"
                     android:textOff=""
-                    android:enabled="false"
                     android:textOn=""
                     android:tag="2"
                     android:thumb="@drawable/design_of_switch_thumb" />
@@ -324,7 +322,6 @@
                     android:rotation="270"
                     android:textOff=""
                     android:textOn=""
-                    android:enabled="false"
                     android:tag="3"
                     android:thumb="@drawable/design_of_switch_thumb" />
 
@@ -352,7 +349,6 @@
                     android:rotation="270"
                     android:textOff=""
                     android:textOn=""
-                    android:enabled="false"
                     android:tag="4"
                     android:thumb="@drawable/design_of_switch_thumb" />
 

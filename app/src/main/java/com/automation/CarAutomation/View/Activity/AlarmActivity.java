@@ -132,7 +132,7 @@ public class AlarmActivity extends AppCompatActivity implements TimePickerDialog
         listRelayLabels = new ArrayList<>();
 
         for (int i = 0; i < 4; i++)
-            listRelayLabels.add(sharedPreferencesContainer.settings.getString(String.valueOf(R.id.sw_relay_1  + i), null));
+            listRelayLabels.add(sharedPreferencesContainer.settings.getString(String.valueOf(R.id.tv_relay_1  + i), null));
 
         ArrayAdapter<String> spinnerArrayAdapter = new ArrayAdapter<>(
                 this,
