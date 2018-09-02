@@ -1,11 +1,13 @@
 package com.automation.CarAutomation.Model;
 
+import android.content.Context;
 import android.content.SharedPreferences;
+import android.support.v7.app.AppCompatActivity;
 
-public class SharedPreferencesContainer {
+public class SharedPreferencesContainer extends AppCompatActivity {
 
     /*  SINGLETON DESIGN PATTERN    */
-    private SharedPreferencesContainer(){}
+    private SharedPreferencesContainer(){ }
     private static SharedPreferencesContainer instance;
     public static synchronized SharedPreferencesContainer getInstance(){
         return (instance == null) ? (instance = new SharedPreferencesContainer()) : instance;

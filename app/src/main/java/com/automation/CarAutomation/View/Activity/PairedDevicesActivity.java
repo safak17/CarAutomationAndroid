@@ -2,7 +2,9 @@ package com.automation.CarAutomation.View.Activity;
 
 import android.app.Activity;
 import android.bluetooth.BluetoothDevice;
+import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.support.v7.app.AlertDialog;
 import android.os.Bundle;
 import android.util.Log;
@@ -46,20 +48,32 @@ public class PairedDevicesActivity extends Activity {
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
                 BluetoothDevice bluetoothDevice = (BluetoothDevice) lvPairedDevicesList.getItemAtPosition(position);
 
-                if( bluetoothContainer.connectKnownBluetoothDevice(bluetoothDevice.getAddress()) )
+                if( bluetoothContainer.connectKnownBluetoothDevice(bluetoothDevice.getAddress()) ){
+                    Log.e("PairedDeviceActivity", "CONNECTED");
                     Toast.makeText(App.getContext(), "Connection established.", Toast.LENGTH_LONG).show();
-                else
+                }
+                else{
+                    Log.e("PairedDeviceActivity", "CONNECTION_FAILED");
                     Toast.makeText(App.getContext(), "Connection failed.", Toast.LENGTH_LONG).show();
+                }
+
             }
         });
 
+        Log.e("PairedDeviceActivity", "onCreate");
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        Log.e("PairedDeviceActivity", "onStart");
     }
 
     @Override
     protected void onResume() {
         super.onResume();
 
-        Log.e("RESUME", "1");
+        Log.e("PairedDeviceActivity", "onResume");
 
         if( ! bluetoothContainer.bluetoothAdapter.isEnabled() )
             displayAlertDialog();
@@ -70,13 +84,29 @@ public class PairedDevicesActivity extends Activity {
     @Override
     protected void onPause() {
         super.onPause();
-        Log.e("PAUSE", "2");
+        Log.e("PairedDeviceActivity", "onPause");
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        Log.e("PairedDeviceActivity", "onStop");
+    }
+
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+        Log.e("PairedDeviceActivity", "onRestart");
     }
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        Log.e("DESTROY", "2");
+        Log.e("PairedDeviceActivity", "onDestroy");
+        try {
+            bluetoothContainer.bluetoothCommunicationThread.cancel();
+            Log.e("PairedDeviceActivity", "onDestroyBtClose");
+        }catch (Exception e) {}
     }
 
     private void showPairedDevicesList() {

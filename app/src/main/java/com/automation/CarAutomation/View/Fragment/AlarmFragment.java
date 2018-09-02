@@ -1,9 +1,14 @@
 package com.automation.CarAutomation.View.Fragment;
 
+import android.app.Activity;
+import android.content.Context;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -25,6 +30,7 @@ public class AlarmFragment extends Fragment {
     RecyclerView alarmRecyclerView;
     public AlarmAdapter alarmAdapter;
 
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         rootView = inflater.inflate(R.layout.fragment_alarm, container, false);
@@ -35,9 +41,17 @@ public class AlarmFragment extends Fragment {
         return rootView;
     }
 
+
+    @Override
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+        Log.e("onActivityCreated", "AlarmFragment");
+    }
+
     @Override
     public void onResume() {
         super.onResume();
+        Log.e("onResume", "AlarmFragment");
 
         if( arduinoVariableContainer.alarmList.size() == 0 )
             showEmptyAlarmListScreen();

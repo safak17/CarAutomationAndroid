@@ -1,11 +1,16 @@
 package com.automation.CarAutomation.View.Fragment;
 
+import android.app.Activity;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentActivity;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.SwitchCompat;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,6 +25,8 @@ import com.automation.CarAutomation.R;
 
 
 public class DashboardFragment extends Fragment {
+
+    private FragmentActivity listener;
 
     public DashboardFragment() { }
 
@@ -50,6 +57,18 @@ public class DashboardFragment extends Fragment {
 
         return rootView;
     } // onCreateView
+
+    @Override
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+        Log.e("onActivityCreated", "DashboardFragment");
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        Log.e("onResume", "DashboardFragment");
+    }
 
     private void initConnectedDeviceName(){
         tvConnectedDeviceName.setText(bluetoothContainer.bluetoothSocket.getRemoteDevice().getName().toString());

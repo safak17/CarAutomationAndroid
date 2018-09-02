@@ -1,6 +1,6 @@
 package com.automation.CarAutomation.View.Activity;
 
-import com.automation.CarAutomation.Controller.App;
+import com.automation.CarAutomation.Controller.BluetoothCommunicationThread;
 import com.automation.CarAutomation.Model.BluetoothContainer;
 import com.automation.CarAutomation.Model.SharedPreferencesContainer;
 import com.automation.CarAutomation.R;
@@ -13,7 +13,6 @@ import android.content.Intent;
 import android.os.Handler;
 import android.support.design.widget.TabLayout;
 import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 
 import android.support.v4.app.Fragment;
@@ -27,6 +26,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import java.io.IOException;
+import java.util.Set;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -37,15 +37,14 @@ public class TabbedActivity extends AppCompatActivity {
     BluetoothContainer bluetoothContainer = BluetoothContainer.getInstance();
     SharedPreferencesContainer sharedPreferencesContainer = SharedPreferencesContainer.getInstance();
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tabbed);
 
-
-        SectionsPagerAdapter mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
-        ViewPager mViewPager = findViewById(R.id.container);
-        mViewPager.setAdapter(mSectionsPagerAdapter);
+        bluetoothContainer.bluetoothCommunicationThread = new BluetoothCommunicationThread(bluetoothContainer.bluetoothSocket);
+        bluetoothContainer.bluetoothCommunicationThread.start();
 
         final FloatingActionButton fabAddAlarm = findViewById(R.id.fab_add_alarm);
         fabAddAlarm.setOnClickListener(new View.OnClickListener() {
@@ -57,6 +56,14 @@ public class TabbedActivity extends AppCompatActivity {
         });
 
         TabLayout tabLayout = findViewById(R.id.tabs);
+        SectionsPagerAdapter mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
+        ViewPager mViewPager = findViewById(R.id.container);
+        mViewPager.setAdapter(mSectionsPagerAdapter);
+        mViewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
+
+        tabLayout.addOnTabSelectedListener(new TabLayout.ViewPagerOnTabSelectedListener(mViewPager));
+
+
         tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
@@ -81,54 +88,58 @@ public class TabbedActivity extends AppCompatActivity {
             public void onTabUnselected(TabLayout.Tab tab) {
                 if( tab.getText().equals("Alarm"))
                     fabAddAlarm.setVisibility(View.GONE);
-
             }
 
             @Override
             public void onTabReselected(TabLayout.Tab tab) { }
         });
 
-
-        mViewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
-        tabLayout.addOnTabSelectedListener(new TabLayout.ViewPagerOnTabSelectedListener(mViewPager));
-
-        // TODO : Class'ın içinw alınabiliir mi SharedPreferencesContainer
         sharedPreferencesContainer.settings = this.getSharedPreferences("settings", Context.MODE_PRIVATE);
         sharedPreferencesContainer.editor = sharedPreferencesContainer.settings.edit();
+    }
 
+
+    @Override
+    public void onAttachFragment(Fragment fragment) {
+        super.onAttachFragment(fragment);
+        Log.e("TabbedActivity", "onAttachFragment");
+        Log.e("onAttachFragmentSizeS", String.valueOf(getSupportFragmentManager().getFragments().size()));
     }
 
     @Override
     protected void onPause() {
         super.onPause();
-        Log.i("TABBED_ACTIVITY", "onPause");
+        Log.e("TabbedActivity", "onPause");
     }
+
 
     @Override
     protected void onStop() {
         super.onStop();
-        Log.i("TABBED_ACTIVITY", "onStop");
+        Log.e("TabbedActivity", "onStop");
     }
 
     @Override
     protected void onRestart() {
         super.onRestart();
-        Log.i("TABBED_ACTIVITY", "onRestart");
+        Log.e("TabbedActivity", "onRestart");
     }
 
     @Override
     protected void onStart() {
         super.onStart();
-        Log.i("TABBED_ACTIVITY", "onStart");
+        Log.e("TabbedActivity", "onStart");
     }
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        Log.i("TABBED_ACTIVITY", "onDestroy");
+        Log.e("TabbedActivity", "onDestroy");
+
         try {
-            bluetoothContainer.bluetoothSocket.close();
-        } catch (IOException e) { e.printStackTrace(); }
+            bluetoothContainer.bluetoothCommunicationThread.cancel();
+            Log.e("TabbedActivity", "onDestroyBtClose");
+        }catch (Exception e) {}
     }
 
     public static class PlaceholderFragment extends Fragment {

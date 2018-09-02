@@ -1,6 +1,8 @@
 package com.automation.CarAutomation.Controller;
 
 import android.bluetooth.BluetoothSocket;
+import android.util.Log;
+
 import com.automation.CarAutomation.Model.BluetoothContainer;
 
 import java.io.IOException;
@@ -59,9 +61,10 @@ public class BluetoothCommunicationThread extends Thread {
     }//end write()
 
     // Closes the connect socket and causes the thread to finish.
-    public void cancel() {
+    public boolean cancel() {
         try {
             bluetoothContainer.bluetoothSocket.close();
-        } catch (IOException e) { }
+            return true;
+        } catch (IOException e) { return false; }
     }
 }

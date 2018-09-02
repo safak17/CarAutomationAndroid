@@ -1,7 +1,9 @@
 package com.automation.CarAutomation.View.Fragment;
 
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -44,6 +46,18 @@ public class SettingsFragment extends Fragment {public SettingsFragment() { }
 
         return rootView;
     } // onCreateView
+
+    @Override
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+        Log.e("onActivityCreated", "SettingsFragment");
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        Log.e("onResume", "SettingsFragment");
+    }
 
     public void syncRealtimeClock() {
 
