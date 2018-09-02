@@ -25,7 +25,6 @@
                 android:id="@+id/tabItemDashboard"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-
                 android:text="@string/tab_item_dashboard_text" />
 
             <android.support.design.widget.TabItem

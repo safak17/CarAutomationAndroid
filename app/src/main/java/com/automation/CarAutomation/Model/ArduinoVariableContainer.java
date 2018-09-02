@@ -25,5 +25,6 @@ public class ArduinoVariableContainer {
     public float voltageB = 0;
     public String voltageUnit = "V";
 
+    public int alarmListSize = -1;
     public ArrayList<Alarm> alarmList = new ArrayList<>();
 }
