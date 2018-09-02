@@ -38,7 +38,7 @@ public class AlarmViewHolder extends RecyclerView.ViewHolder implements View.OnC
     public void setUserInterfaceData(Alarm alarmItem) {
 
         String dateTime = alarmItem.getDigitalClockFormat();
-        String relayName = sharedPreferencesContainer.settings.getString( String.valueOf( R.id.sw_relay_1 + alarmItem.relayNumber -1 ), null);
+        String relayName = sharedPreferencesContainer.settings.getString( String.valueOf( R.id.tv_relay_1 + alarmItem.relayNumber -1 ), null);
 
         this.tvAlarmRelayName.setText(relayName);
 

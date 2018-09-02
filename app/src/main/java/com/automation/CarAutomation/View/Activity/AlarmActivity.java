@@ -77,6 +77,17 @@ public class AlarmActivity extends AppCompatActivity implements TimePickerDialog
             }
         });
 
+        //  TODO: Bunu ternary ile yazmaya çalış.
+        cbRelayOnOff.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if( cbRelayOnOff.isChecked())
+                    cbRelayOnOff.setText("On");
+                else
+                    cbRelayOnOff.setText("Off");
+            }
+        });
+
         btnSaveAlarm.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -89,6 +100,7 @@ public class AlarmActivity extends AppCompatActivity implements TimePickerDialog
                 alarm.minute        = Integer.valueOf( btnTimePicker.getText().toString().substring(3));
                 alarm.relayNumber   = spinnerRelayName.getSelectedItemPosition() + 1;
                 alarm.relayStatus   = (cbRelayOnOff.isChecked())? 1 : 0;
+
 
                 arduinoVariableContainer.alarmList.add(alarm);
 

@@ -47,7 +47,7 @@
             android:layout_gravity="start|center_vertical"
             android:gravity="center"
             android:text="@string/cb_alarm_repeat"
-            android:textSize="14sp" />
+            android:textSize="13sp" />
     </LinearLayout>
 
     <LinearLayout
