@@ -31,8 +31,7 @@ public class DashboardFragment extends Fragment {
     public TextView tvVoltageValue;
     public TextView tvCurrentValue;
     public TextView tvTemperatureValue;
-
-
+    public TextView tvConnectedDeviceName;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -42,13 +41,19 @@ public class DashboardFragment extends Fragment {
         tvVoltageValue = rootView.findViewById(R.id.tv_voltage_value);
         tvCurrentValue = rootView.findViewById(R.id.tv_current_value);
         tvTemperatureValue = rootView.findViewById(R.id.tv_temperature_value);
+        tvConnectedDeviceName = rootView.findViewById(R.id.tv_connected_device_name);
 
-        initSwitchCompatOfRelays();
+
+        initConnectedDeviceName();
         initTextViewOfRelays();
+        initSwitchCompatOfRelays();
 
         return rootView;
     } // onCreateView
 
+    private void initConnectedDeviceName(){
+        tvConnectedDeviceName.setText(bluetoothContainer.bluetoothSocket.getRemoteDevice().getName().toString());
+    }
 
     private void initSwitchCompatOfRelays(){
 
@@ -74,9 +79,7 @@ public class DashboardFragment extends Fragment {
         }// for
     } // initSwitchCompatOfRelays()
 
-
-    private void initTextViewOfRelays()
-    {
+    private void initTextViewOfRelays() {
         for (int textViewId = R.id.tv_relay_1; textViewId <= R.id.tv_relay_4; textViewId++) {
 
             TextView textView = rootView.findViewById( textViewId );

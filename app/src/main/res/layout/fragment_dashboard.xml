@@ -10,39 +10,34 @@
     android:orientation="vertical"
     android:padding="10dp">
 
-    <android.support.v7.widget.CardView
+    <LinearLayout
         android:layout_width="match_parent"
-        app:cardElevation="4dp"
-        android:layout_marginStart="20dp"
-        app:cardBackgroundColor="#F5F5F5"
-        app:contentPadding="5dp"
-        android:layout_marginEnd="20dp"
         android:layout_height="wrap_content">
 
-        <LinearLayout
-            android:orientation="horizontal"
+        <android.support.v7.widget.CardView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            app:cardElevation="4dp"
+            android:layout_marginStart="20dp"
+            app:cardBackgroundColor="#F5F5F5"
+            app:contentPadding="5dp"
+            android:layout_marginEnd="20dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp">
 
-            <ImageView
-                android:layout_width="0dp"
-                android:layout_weight="1"
-                android:layout_height="25dp"
-                android:src="@drawable/status_of_bluetooth_circle_disconnected"/>
             <TextView
-                android:layout_width="0dp"
-                android:layout_weight="5"
-                android:paddingStart="10dp"
-                android:paddingEnd="10dp"
+                android:id="@+id/tv_connected_device_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
                 android:textSize="18sp"
-                android:text="CarAutomation"
-                android:gravity="center|start"
-                android:layout_height="match_parent"
-                />
+                android:textStyle="bold"
+                android:textColor="@color/mdtp_white"
+                android:gravity="center"
 
-        </LinearLayout>
+                android:padding="10dp"
+                android:background="#ed71af"/>
 
-    </android.support.v7.widget.CardView>
+        </android.support.v7.widget.CardView>
+    </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"

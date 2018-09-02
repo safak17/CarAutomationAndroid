@@ -12,7 +12,8 @@
     <application
         android:name=".Controller.App"
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
+        android:label="CarAutomation"
+        android:icon="@drawable/car"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
