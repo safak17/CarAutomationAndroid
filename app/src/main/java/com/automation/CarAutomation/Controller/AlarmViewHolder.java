@@ -3,6 +3,7 @@ package com.automation.CarAutomation.Controller;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.graphics.Color;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.ImageView;
@@ -15,6 +16,7 @@ import com.automation.CarAutomation.Model.BluetoothContainer;
 import com.automation.CarAutomation.Model.ArduinoVariableContainer;
 import com.automation.CarAutomation.Model.SharedPreferencesContainer;
 import com.automation.CarAutomation.R;
+import com.automation.CarAutomation.View.Activity.TabbedActivity;
 
 public class AlarmViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
@@ -80,7 +82,8 @@ public class AlarmViewHolder extends RecyclerView.ViewHolder implements View.OnC
 
     private void displayAlertDialog() {
 
-        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(App.getContext());
+
+        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder( App.getContext() );
 
         alertDialogBuilder.setTitle("Warning!");
 

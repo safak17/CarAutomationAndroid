@@ -11,6 +11,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.automation.CarAutomation.Model.ArduinoVariableContainer;
 import com.automation.CarAutomation.Model.BluetoothContainer;
 import com.automation.CarAutomation.Model.SharedPreferencesContainer;
 import com.automation.CarAutomation.R;
@@ -120,9 +121,10 @@ public class SettingsFragment extends Fragment {public SettingsFragment() { }
                     if(!focus) {
 
                         String sharedPreferencesKey = String.valueOf(editText.getTag());
+                        String editTextStringValue  = editText.getText().toString();
 
                         if( editText.getTag().toString().startsWith("unit"))
-                            sharedPreferencesContainer.editor.putString( sharedPreferencesKey, editText.getText().toString());
+                            sharedPreferencesContainer.editor.putString( sharedPreferencesKey, editTextStringValue);
                         else
                             sharedPreferencesContainer.editor.putFloat( sharedPreferencesKey, Float.valueOf(editText.getText().toString()));
 

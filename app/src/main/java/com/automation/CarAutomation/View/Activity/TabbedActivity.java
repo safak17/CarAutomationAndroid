@@ -176,9 +176,9 @@ public class TabbedActivity extends AppCompatActivity {
 
             updateRelayStatus(arduinoVariableContainer.statusOfRelays, dashboardFragment);
 
-            dashboardFragment.tvTemperatureValue.setText(String.format(Locale.getDefault(),"%.2f", arduinoVariableContainer.temperature));
-            dashboardFragment.tvCurrentValue.setText(String.format(Locale.getDefault(),"%.2f", arduinoVariableContainer.current));
-            dashboardFragment.tvVoltageValue.setText(String.format(Locale.getDefault(),"%.2f", arduinoVariableContainer.voltage));
+            dashboardFragment.tvTemperatureValue.setText(String.format(Locale.getDefault(),"%.2f", arduinoVariableContainer.temperature) + " " + arduinoVariableContainer.temperatureUnit);
+            dashboardFragment.tvCurrentValue.setText(String.format(Locale.getDefault(),"%.2f", arduinoVariableContainer.current) + " " + arduinoVariableContainer.currentUnit);
+            dashboardFragment.tvVoltageValue.setText(String.format(Locale.getDefault(),"%.2f", arduinoVariableContainer.voltage) + " " + arduinoVariableContainer.voltageUnit);
         }catch (Exception e) { }
     }
 
@@ -207,7 +207,14 @@ public class TabbedActivity extends AppCompatActivity {
         try{
             AlarmFragment alarmFragment = (AlarmFragment)getSupportFragmentManager().findFragmentByTag("android:switcher:" + mViewPager.getId() + ":" + mViewPager.getCurrentItem());
             alarmFragment.alarmAdapter.notifyDataSetChanged();
-        }catch (Exception e) { }
+
+            if( arduinoVariableContainer.alarmListSize == 0 )
+                alarmFragment.showEmptyAlarmListScreen();
+            else
+                alarmFragment.showAlarmList();
+        }catch (Exception e) {
+            Log.e("alarmAdapterError", e.getMessage());
+        }
     }
 
 
@@ -280,6 +287,7 @@ public class TabbedActivity extends AppCompatActivity {
                                 }
                             }
                             else if ( command.startsWith("ALARM_LIST_SIZE")){
+                                arduinoVariableContainer.alarmList.clear();
                                 arduinoVariableContainer.alarmListSize = CommandParser.getAlarmListSize(command);
                             }
                             else if( command.startsWith("ALARM_LIST_ITEM")){

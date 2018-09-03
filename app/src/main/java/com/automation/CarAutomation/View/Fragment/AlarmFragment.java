@@ -39,6 +39,8 @@ public class AlarmFragment extends Fragment {
 
         alarmRecyclerView   =  rootView.findViewById(R.id.rv_alarm_list);
         emptyRelativeLayout =  rootView.findViewById(R.id.rl_empty_view);
+        alarmAdapter = new AlarmAdapter(App.getContext(), arduinoVariableContainer.alarmList);
+        alarmRecyclerView.setAdapter(alarmAdapter);
 
         return rootView;
     }
@@ -56,11 +58,6 @@ public class AlarmFragment extends Fragment {
 
         Log.e(" AF_onResume",String.valueOf(getActivity().getSupportFragmentManager().getFragments().size()));
         bluetoothContainer.bluetoothCommunicationThread.write("al ;");
-        /*
-        if( arduinoVariableContainer.alarmList.size() == 0 )
-            showEmptyAlarmListScreen();
-        else
-            showAlarmList();*/
     }
 
     @Override
@@ -68,21 +65,17 @@ public class AlarmFragment extends Fragment {
         super.onStart();
     }
 
-    private void showEmptyAlarmListScreen(){
+    public void showEmptyAlarmListScreen(){
         alarmRecyclerView.setVisibility(View.GONE);
         emptyRelativeLayout.setVisibility(View.VISIBLE);
     }
 
-    private void showAlarmList(){
-        alarmAdapter = new AlarmAdapter(App.getContext(), arduinoVariableContainer.alarmList);
-        alarmRecyclerView.setAdapter(alarmAdapter);
-
+    public void showAlarmList(){
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(App.getContext());
         linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         alarmRecyclerView.setLayoutManager(linearLayoutManager);
 
         alarmRecyclerView.setVisibility(View.VISIBLE);
         emptyRelativeLayout.setVisibility(View.GONE);
-
     }
 }
