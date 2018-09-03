@@ -19,6 +19,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.automation.CarAutomation.Controller.App;
+import com.automation.CarAutomation.Controller.TimerController;
 import com.automation.CarAutomation.Model.BluetoothContainer;
 import com.automation.CarAutomation.Model.SharedPreferencesContainer;
 import com.automation.CarAutomation.R;
@@ -34,6 +35,7 @@ public class DashboardFragment extends Fragment {
 
     SharedPreferencesContainer sharedPreferencesContainer   = SharedPreferencesContainer.getInstance();
     BluetoothContainer bluetoothContainer                   = BluetoothContainer.getInstance();
+    TimerController timerController = TimerController.getInstance();
 
     public TextView tvVoltageValue;
     public TextView tvCurrentValue;
@@ -61,13 +63,20 @@ public class DashboardFragment extends Fragment {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        Log.e("onActivityCreated", "DashboardFragment");
+        Log.e(" DF_onActivityCreated",String.valueOf(getActivity().getSupportFragmentManager().getFragments().size()));
     }
 
     @Override
     public void onResume() {
         super.onResume();
-        Log.e("onResume", "DashboardFragment");
+        Log.e(" DF_onResume",String.valueOf(getActivity().getSupportFragmentManager().getFragments().size()));
+        timerController.startTimer("pg ;", 5000);
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        Log.e(" DF_onStart",String.valueOf(getActivity().getSupportFragmentManager().getFragments().size()));
     }
 
     private void initConnectedDeviceName(){

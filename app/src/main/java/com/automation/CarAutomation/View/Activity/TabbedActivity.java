@@ -1,6 +1,8 @@
 package com.automation.CarAutomation.View.Activity;
 
+import com.automation.CarAutomation.Controller.App;
 import com.automation.CarAutomation.Controller.BluetoothCommunicationThread;
+import com.automation.CarAutomation.Controller.TimerController;
 import com.automation.CarAutomation.Model.BluetoothContainer;
 import com.automation.CarAutomation.Model.SharedPreferencesContainer;
 import com.automation.CarAutomation.R;
@@ -10,7 +12,6 @@ import com.automation.CarAutomation.View.Fragment.SettingsFragment;
 
 import android.content.Context;
 import android.content.Intent;
-import android.os.Handler;
 import android.support.design.widget.TabLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
@@ -25,17 +26,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import java.io.IOException;
-import java.util.Set;
-import java.util.Timer;
-import java.util.TimerTask;
-
-
 public class TabbedActivity extends AppCompatActivity {
 
 
     BluetoothContainer bluetoothContainer = BluetoothContainer.getInstance();
     SharedPreferencesContainer sharedPreferencesContainer = SharedPreferencesContainer.getInstance();
+    TimerController timerController = TimerController.getInstance();
 
 
     @Override
@@ -68,19 +64,19 @@ public class TabbedActivity extends AppCompatActivity {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
 
-                stoptimertask();
+                timerController.stoptimertask();
 
                 if ( tab.getText().equals("Dashboard") ) {
-                    startTimer("pg ;", 5000);
+                    timerController.startTimer("pg ;", 5000);
                 }
 
                 else if ( tab.getText().equals("Alarm")) {
-                    startTimer("al ;", 5000);
+                    timerController.startTimer("al ;", 5000);
                     fabAddAlarm.setVisibility(View.VISIBLE);
                 }
 
                 else if ( tab.getText().equals("Settıngs") )
-                    startTimer("cg ;", 1000);
+                    timerController.startTimer("cg ;", 1000);
 
             }
 
@@ -100,45 +96,37 @@ public class TabbedActivity extends AppCompatActivity {
 
 
     @Override
-    public void onAttachFragment(Fragment fragment) {
-        super.onAttachFragment(fragment);
-        Log.e("TabbedActivity", "onAttachFragment");
-        Log.e("onAttachFragmentSizeS", String.valueOf(getSupportFragmentManager().getFragments().size()));
+    protected void onStart() {
+        super.onStart();
+        Log.e(" TA_onStart",String.valueOf((getSupportFragmentManager().getFragments().size())));
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        Log.e(" TA_onResume",String.valueOf((getSupportFragmentManager().getFragments().size())));
     }
 
     @Override
     protected void onPause() {
         super.onPause();
-        Log.e("TabbedActivity", "onPause");
+        Log.e(" TA_onPause",String.valueOf((getSupportFragmentManager().getFragments().size())));
     }
-
 
     @Override
     protected void onStop() {
         super.onStop();
-        Log.e("TabbedActivity", "onStop");
-    }
-
-    @Override
-    protected void onRestart() {
-        super.onRestart();
-        Log.e("TabbedActivity", "onRestart");
-    }
-
-    @Override
-    protected void onStart() {
-        super.onStart();
-        Log.e("TabbedActivity", "onStart");
+        Log.e(" TA_onStop",String.valueOf((getSupportFragmentManager().getFragments().size())));
     }
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        Log.e("TabbedActivity", "onDestroy");
+        Log.e(" TA_onDestroy",String.valueOf((getSupportFragmentManager().getFragments().size())));
 
         try {
             bluetoothContainer.bluetoothCommunicationThread.cancel();
-            Log.e("TabbedActivity", "onDestroyBtClose");
+            Log.e("TA", "onDestroyBtClose");
         }catch (Exception e) {}
     }
 
@@ -186,37 +174,4 @@ public class TabbedActivity extends AppCompatActivity {
         public int getCount() { return 3; }
     }
 
-    //  TODO: Başka bir sınıf yazılabilir.
-    Timer timer;
-    TimerTask timerTask;
-    public void startTimer(String arduinoCommand, int periodInMilliseconds) {
-        timer = new Timer();
-
-        initializeTimerTask(arduinoCommand);
-
-        timer.schedule(timerTask, 0, periodInMilliseconds);
-    }
-
-    public void stoptimertask() {
-        if (timer != null) {
-            timer.cancel();
-            timer = null;
-        }
-    }
-
-    //  We are going to use a handler to be able to run in our TimerTask
-    final Handler handler = new Handler();
-    public void initializeTimerTask(final String arduinoCommand) {
-
-        timerTask = new TimerTask() {
-            public void run() {
-
-                handler.post(new Runnable() {
-                    public void run() {
-                        bluetoothContainer.bluetoothCommunicationThread.write(arduinoCommand);
-                    }
-                });
-            }
-        };
-    }
 }

@@ -2,6 +2,8 @@ package com.automation.CarAutomation.Model;
 
 import android.annotation.SuppressLint;
 
+import android.app.Application;
+import android.content.pm.ActivityInfo;
 import android.support.v4.app.Fragment;
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
@@ -13,10 +15,12 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.SwitchCompat;
 import android.util.Log;
 
+import com.automation.CarAutomation.Controller.App;
 import com.automation.CarAutomation.Controller.BluetoothCommunicationThread;
 import com.automation.CarAutomation.Controller.BluetoothDeviceAdapter;
 import com.automation.CarAutomation.Controller.CommandParser;
 import com.automation.CarAutomation.R;
+import com.automation.CarAutomation.View.Activity.TabbedActivity;
 import com.automation.CarAutomation.View.Fragment.AlarmFragment;
 import com.automation.CarAutomation.View.Fragment.DashboardFragment;
 import com.automation.CarAutomation.View.Fragment.SettingsFragment;
@@ -27,7 +31,9 @@ import java.util.List;
 import java.util.Locale;
 import java.util.UUID;
 
-public class BluetoothContainer extends AppCompatActivity {
+//  AppCompatActivity
+//  App
+public class BluetoothContainer extends AppCompatActivity{
 
     /*  SINGLETON DESIGN PATTERN    */
     private static BluetoothContainer instance;

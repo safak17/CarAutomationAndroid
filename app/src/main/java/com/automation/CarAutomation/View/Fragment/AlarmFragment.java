@@ -51,14 +51,20 @@ public class AlarmFragment extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
-        Log.e("onResume", "AlarmFragment");
 
+        Log.e(" AF_onResume",String.valueOf(getActivity().getSupportFragmentManager().getFragments().size()));
+
+        /*
         if( arduinoVariableContainer.alarmList.size() == 0 )
             showEmptyAlarmListScreen();
         else
-            showAlarmList();
+            showAlarmList();*/
     }
 
+    @Override
+    public void onStart() {
+        super.onStart();
+    }
 
     private void showEmptyAlarmListScreen(){
         alarmRecyclerView.setVisibility(View.GONE);
