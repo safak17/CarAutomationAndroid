@@ -28,6 +28,7 @@ public class ArduinoVariableContainer {
     public float voltageB = 0;
     public String voltageUnit = "V";
 
+    public int statusOfRelays = -1;
 
     public String dateTimeOfRealTimeClock = "-1";
 

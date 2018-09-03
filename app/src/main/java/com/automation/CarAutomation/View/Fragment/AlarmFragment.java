@@ -17,6 +17,7 @@ import android.widget.RelativeLayout;
 import com.automation.CarAutomation.Controller.AlarmAdapter;
 import com.automation.CarAutomation.Controller.App;
 import com.automation.CarAutomation.Model.ArduinoVariableContainer;
+import com.automation.CarAutomation.Model.BluetoothContainer;
 import com.automation.CarAutomation.R;
 
 public class AlarmFragment extends Fragment {
@@ -24,6 +25,7 @@ public class AlarmFragment extends Fragment {
     public AlarmFragment() { }
 
     ArduinoVariableContainer arduinoVariableContainer = ArduinoVariableContainer.getInstance();
+    BluetoothContainer bluetoothContainer = BluetoothContainer.getInstance();
 
     View rootView;
     RelativeLayout emptyRelativeLayout;
@@ -45,7 +47,7 @@ public class AlarmFragment extends Fragment {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        Log.e("onActivityCreated", "AlarmFragment");
+        Log.e(" AF_onActivityCreated", "AlarmFragment");
     }
 
     @Override
@@ -53,7 +55,7 @@ public class AlarmFragment extends Fragment {
         super.onResume();
 
         Log.e(" AF_onResume",String.valueOf(getActivity().getSupportFragmentManager().getFragments().size()));
-
+        bluetoothContainer.bluetoothCommunicationThread.write("al ;");
         /*
         if( arduinoVariableContainer.alarmList.size() == 0 )
             showEmptyAlarmListScreen();

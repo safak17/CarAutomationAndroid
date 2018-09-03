@@ -42,6 +42,7 @@ public class TabbedActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tabbed);
 
+        initBluetoothCommunicationHandler();
         bluetoothContainer.bluetoothCommunicationThread = new BluetoothCommunicationThread(bluetoothContainer.bluetoothSocket);
         bluetoothContainer.bluetoothCommunicationThread.start();
 
@@ -75,13 +76,13 @@ public class TabbedActivity extends AppCompatActivity {
                 }
 
                 else if ( tab.getText().equals("Alarm")) {
-                    startTimer("al ;", 2000);
                     Log.e(" TA_Alarm", "al ;");
+                    bluetoothContainer.bluetoothCommunicationThread.write("al ;");
                     fabAddAlarm.setVisibility(View.VISIBLE);
                 }
 
                 else if ( tab.getText().equals("Settıngs") ){
-                    startTimer("cg ;", 1000);
+                    startTimer("cg ;", 2000);
                     Log.e(" TA_Settings", "cg ;");
                 }
 
@@ -115,7 +116,7 @@ public class TabbedActivity extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
         Log.e(" TA_onResume",String.valueOf((getSupportFragmentManager().getFragments().size())));
-        initBluetoothCommunicationHandler();
+
     }
 
     @Override
@@ -173,11 +174,27 @@ public class TabbedActivity extends AppCompatActivity {
         try{
             DashboardFragment dashboardFragment = (DashboardFragment)getSupportFragmentManager().findFragmentByTag("android:switcher:" + mViewPager.getId() + ":" + mViewPager.getCurrentItem());
 
+            updateRelayStatus(arduinoVariableContainer.statusOfRelays, dashboardFragment);
+
             dashboardFragment.tvTemperatureValue.setText(String.format(Locale.getDefault(),"%.2f", arduinoVariableContainer.temperature));
             dashboardFragment.tvCurrentValue.setText(String.format(Locale.getDefault(),"%.2f", arduinoVariableContainer.current));
             dashboardFragment.tvVoltageValue.setText(String.format(Locale.getDefault(),"%.2f", arduinoVariableContainer.voltage));
         }catch (Exception e) { }
     }
+
+    public void updateRelayStatus(int statusOfRelays, DashboardFragment dashboardFragment) {
+        int relayMask = 1;
+        Boolean isActive;
+
+        for (int relayNumber = 1; relayNumber <= 4; relayNumber++) {
+            isActive = ((statusOfRelays & relayMask) != 0) ? true : false;
+
+            ((SwitchCompat) dashboardFragment.rootView.findViewById( R.id.sw_relay_1 + relayNumber - 1)).setChecked(isActive);
+
+            relayMask *= 2;
+        }
+    }
+
 
     private void UpdateSettingsUI(){
         try{
@@ -212,6 +229,8 @@ public class TabbedActivity extends AppCompatActivity {
                             if( command.startsWith("PERIPHERAL_GET")) {
 
                                 String[] peripheralData = CommandParser.getPeripheralData(command);
+
+                                arduinoVariableContainer.statusOfRelays     = Integer.valueOf(peripheralData[0]);
 
                                 Float temperatureMeasurement                = Float.valueOf(peripheralData[1]);
                                 arduinoVariableContainer.temperatureA       = sharedPreferencesContainer.get_a_value_of("temperature");
@@ -334,6 +353,7 @@ public class TabbedActivity extends AppCompatActivity {
                 handler.post(new Runnable() {
                     public void run() {
                         bluetoothContainer.bluetoothCommunicationThread.write(arduinoCommand);
+                        Log.e(" TA_timerCommand", arduinoCommand);
                     }
                 });
             }

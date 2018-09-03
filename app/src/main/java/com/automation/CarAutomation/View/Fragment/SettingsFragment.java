@@ -49,13 +49,13 @@ public class SettingsFragment extends Fragment {public SettingsFragment() { }
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        Log.e("onActivityCreated", "SettingsFragment");
+        Log.e(" SF_ onActivityCreated", "SettingsFragment");
     }
 
     @Override
     public void onResume() {
         super.onResume();
-        Log.e("onResume", "SettingsFragment");
+        Log.e(" SF_onResume", "SettingsFragment");
     }
 
     public void syncRealtimeClock() {

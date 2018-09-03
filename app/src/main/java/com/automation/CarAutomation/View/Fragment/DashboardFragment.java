@@ -67,6 +67,7 @@ public class DashboardFragment extends Fragment {
     public void onResume() {
         super.onResume();
         Log.e(" DF_onResume",String.valueOf(getActivity().getSupportFragmentManager().getFragments().size()));
+        bluetoothContainer.bluetoothCommunicationThread.write("pg ;");
     }
 
     @Override
