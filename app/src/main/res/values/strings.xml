@@ -9,29 +9,28 @@
     <string name="cb_relay_on">On</string>
     <string name="cb_relay_off">Off</string>
     <string-array name="days_of_week">
-        <item>Monday</item>
-        <item>Tuesday</item>
-        <item>Wednesday</item>
-        <item>Thursday</item>
-        <item>Friday</item>
-        <item>Saturday</item>
-        <item>Sunday</item>
+        <item>Pazartesi</item>
+        <item>Salı</item>
+        <item>Çarşamba</item>
+        <item>Perşembe</item>
+        <item>Cuma</item>
+        <item>Cumartesi</item>
+        <item>Pazar</item>
     </string-array>
 
     <string name="dashboard_default_sensor_value">N/A</string>
 
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
 
 
-    <string name="settings_analog_pin_temperature_label">Temperature</string>
-    <string name="settings_analog_pin_current_label">Current</string>
-    <string name="settings_analog_pin_voltage_label">Voltage</string>
+    <string name="settings_analog_pin_temperature_label">Sıcaklık</string>
+    <string name="settings_analog_pin_current_label">Akım</string>
+    <string name="settings_analog_pin_voltage_label">Gerilim</string>
 
-    <string name="settings_a_value_label" translatable="false">a</string>
-    <string name="settings_b_value_label" translatable="false">b</string>
+    <string name="settings_seonsor" translatable="false">Ad</string>
+    <string name="settings_a_value_label" translatable="false">Çarpan</string>
+    <string name="settings_b_value_label" translatable="false">Taban</string>
 
-    <string name="settings_unit_label">Unit</string>
+    <string name="settings_unit_label">Birim</string>
 
 
 </resources>

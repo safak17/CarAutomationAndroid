@@ -4,6 +4,7 @@
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/fragment_settings"
     android:tag="fragment_settings"
     android:layout_width="match_parent"
@@ -15,7 +16,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:layout_marginTop="10dp"
         android:clickable="false"
         android:foreground="?android:attr/selectableItemBackground"
         app:cardBackgroundColor="#cfd8dc"
@@ -30,78 +30,77 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_gravity="end"
-                android:layout_margin="5dp"
                 android:background="@color/colorPrimary"
-                android:gravity="end"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                android:gravity="center">
 
                 <TextView
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
+                    android:layout_weight="2"
                     android:layout_height="wrap_content"
-                    android:layout_marginEnd="40dp"
-                    android:padding="10dp"
+                    android:text="@string/settings_seonsor"
+                    android:textColor="@android:color/white"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    android:textAlignment="center"/>
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
                     android:text="@string/settings_a_value_label"
                     android:textColor="@android:color/white"
-                    android:textSize="15sp"
-                    android:textStyle="bold" />
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    android:textAlignment="center"/>
 
                 <TextView
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
                     android:layout_height="wrap_content"
-                    android:layout_marginEnd="25dp"
-                    android:padding="10dp"
                     android:text="@string/settings_b_value_label"
                     android:textColor="@android:color/white"
-                    android:textSize="15sp"
-                    android:textStyle="bold" />
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    android:textAlignment="center"/>
 
                 <TextView
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
                     android:layout_height="wrap_content"
-                    android:layout_marginEnd="15dp"
-                    android:padding="10dp"
                     android:text="@string/settings_unit_label"
                     android:textColor="@android:color/white"
-                    android:textSize="15sp"
-                    android:textStyle="bold" />
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    android:textAlignment="center"/>
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="5dp"
                 android:background="#F5F5F5"
 
                 android:gravity="center"
                 android:orientation="horizontal">
 
-                <LinearLayout
-                    android:layout_width="110dp"
+                <TextView
+                    android:id="@+id/tv_settings_temperature"
+                    android:layout_width="0dp"
+                    android:layout_weight="2"
                     android:layout_height="wrap_content"
-                    android:layout_margin="5dp"
-                    android:background="@color/colorPrimary"
-                    android:gravity="center">
+                    android:text="@string/settings_analog_pin_temperature_label"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    android:textAlignment="center"/>
 
-                    <TextView
-                        android:id="@+id/tv_settings_temperature"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:padding="5dp"
-                        android:text="@string/settings_analog_pin_temperature_label"
-                        android:textColor="@android:color/white"
-                        android:textSize="15sp"
-                        android:textStyle="bold" />
-                </LinearLayout>
 
                 <EditText
                     android:id="@+id/et_a_value_temperature"
                     android:tag="a_value_temperature"
-                    android:layout_width="60dp"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
                     android:layout_height="wrap_content"
-                    android:layout_marginEnd="10dp"
-                    android:layout_marginStart="10dp"
-                    android:ems="10"
                     android:hint="@string/settings_a_value_label"
                     android:inputType="numberDecimal|numberSigned"
                     android:maxLength="40"
@@ -111,10 +110,9 @@
                 <EditText
                     android:id="@+id/et_b_value_temperature"
                     android:tag="b_value_temperature"
-                    android:layout_width="60dp"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
                     android:layout_height="wrap_content"
-                    android:layout_marginEnd="10dp"
-                    android:ems="10"
                     android:hint="@string/settings_b_value_label"
                     android:inputType="numberDecimal|numberSigned"
                     android:maxLength="40"
@@ -124,10 +122,9 @@
                 <EditText
                     android:id="@+id/et_temperature_unit"
                     android:tag="unit_temperature"
-                    android:layout_width="50dp"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
                     android:layout_height="wrap_content"
-                    android:layout_marginEnd="10dp"
-                    android:ems="10"
                     android:hint="@string/settings_unit_label"
                     android:inputType="textPersonName"
                     android:textAlignment="center" />
@@ -136,37 +133,28 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="5dp"
                 android:background="#F5F5F5"
                 android:gravity="center"
                 android:orientation="horizontal">
 
-                <LinearLayout
-                    android:layout_width="110dp"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="5dp"
-                    android:background="@color/colorPrimary"
-                    android:gravity="center">
 
-                    <TextView
-                        android:id="@+id/tv_settings_current"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:padding="5dp"
-                        android:text="@string/settings_analog_pin_current_label"
-                        android:textColor="@android:color/white"
-                        android:textSize="15sp"
-                        android:textStyle="bold" />
-                </LinearLayout>
+                <TextView
+                    android:id="@+id/tv_settings_current"
+                    android:layout_width="0dp"
+                    android:layout_weight="2"
+                    android:layout_height="wrap_content"
+                    android:text="@string/settings_analog_pin_current_label"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    android:textAlignment="center"/>
 
                 <EditText
                     android:id="@+id/et_a_value_current"
                     android:tag="a_value_current"
-                    android:layout_width="60dp"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
                     android:layout_height="wrap_content"
-                    android:layout_marginEnd="10dp"
-                    android:layout_marginStart="10dp"
-                    android:ems="10"
                     android:hint="@string/settings_a_value_label"
                     android:inputType="numberDecimal|numberSigned"
                     android:maxLength="40"
@@ -176,10 +164,9 @@
                 <EditText
                     android:id="@+id/et_b_value_current"
                     android:tag="b_value_current"
-                    android:layout_width="60dp"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
                     android:layout_height="wrap_content"
-                    android:layout_marginEnd="10dp"
-                    android:ems="10"
                     android:hint="@string/settings_b_value_label"
                     android:inputType="numberDecimal|numberSigned"
                     android:maxLength="40"
@@ -189,10 +176,9 @@
                 <EditText
                     android:id="@+id/et_current_unit"
                     android:tag="unit_current"
-                    android:layout_width="50dp"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
                     android:layout_height="wrap_content"
-                    android:layout_marginEnd="10dp"
-                    android:ems="10"
                     android:hint="@string/settings_unit_label"
                     android:inputType="textPersonName"
                     android:textAlignment="center" />
@@ -201,37 +187,28 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="5dp"
                 android:background="#F5F5F5"
                 android:gravity="center"
                 android:orientation="horizontal">
 
-                <LinearLayout
-                    android:layout_width="110dp"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="5dp"
-                    android:background="@color/colorPrimary"
-                    android:gravity="center">
 
-                    <TextView
-                        android:id="@+id/tv_settings_voltage"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:padding="5dp"
-                        android:text="@string/settings_analog_pin_voltage_label"
-                        android:textColor="@android:color/white"
-                        android:textSize="15sp"
-                        android:textStyle="bold" />
-                </LinearLayout>
+                <TextView
+                    android:id="@+id/tv_settings_voltage"
+                    android:layout_width="0dp"
+                    android:layout_weight="2"
+                    android:layout_height="wrap_content"
+                    android:text="@string/settings_analog_pin_voltage_label"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    android:textAlignment="center"/>
 
                 <EditText
                     android:id="@+id/et_a_value_voltage"
                     android:tag="a_value_voltage"
-                    android:layout_width="60dp"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
                     android:layout_height="wrap_content"
-                    android:layout_marginEnd="10dp"
-                    android:layout_marginStart="10dp"
-                    android:ems="10"
                     android:hint="@string/settings_a_value_label"
                     android:inputType="numberDecimal|numberSigned"
                     android:maxLength="40"
@@ -241,10 +218,9 @@
                 <EditText
                     android:id="@+id/et_b_value_voltage"
                     android:tag="b_value_voltage"
-                    android:layout_width="60dp"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
                     android:layout_height="wrap_content"
-                    android:layout_marginEnd="10dp"
-                    android:ems="10"
                     android:hint="@string/settings_b_value_label"
                     android:inputType="numberDecimal|numberSigned"
                     android:maxLength="40"
@@ -254,9 +230,9 @@
                 <EditText
                     android:id="@+id/et_voltage_unit"
                     android:tag="unit_voltage"
-                    android:layout_width="50dp"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
                     android:layout_height="wrap_content"
-                    android:layout_marginEnd="10dp"
                     android:ems="10"
                     android:hint="@string/settings_unit_label"
                     android:inputType="textPersonName"
@@ -266,36 +242,43 @@
         </LinearLayout>
     </android.support.v7.widget.CardView>
 
+
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="50dp"
         android:layout_gravity="center"
-        android:layout_margin="20dp"
-        android:padding="15dp"
-        android:gravity="start"
-        android:orientation="horizontal">
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:layout_marginTop="10dp"
+        android:background="#F5F5F5">
 
-        <Button
-            android:id="@+id/btn_sync_rtc"
-            android:layout_width="110dp"
-            android:layout_height="50dp"
-            android:drawableTop="@drawable/ic_repeat" />
+        <TextView
+            android:id="@+id/tv_realtime_clock"
+            android:layout_width="0dp"
+            android:layout_weight="4"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            tools:text="4 / 9 / 2018 \n23:30:42"
+            android:textAlignment="center"
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_gravity="center|center_horizontal">
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
 
-            <TextView
-                android:id="@+id/tv_realtime_clock"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:gravity="center"
-                android:textAlignment="center"
-
-                android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
-        </LinearLayout>
+        <android.support.v7.widget.CardView
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:clickable="true"
+            app:cardElevation="5dp"
+            app:cardBackgroundColor="#e6e6e6"
+            app:cardCornerRadius="3dp"
+            android:layout_marginEnd="10dp">
+            <ImageView
+                android:id="@+id/btn_sync_rtc"
+                android:layout_width="36dp"
+                android:layout_height="36dp"
+                android:src="@drawable/ic_refresh"
+                android:padding="5dp"
+                android:layout_gravity="center"/>
+        </android.support.v7.widget.CardView>
     </LinearLayout>
-
-
 </LinearLayout>
