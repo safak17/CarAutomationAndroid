@@ -18,7 +18,7 @@
         <item>Pazar</item>
     </string-array>
 
-    <string name="dashboard_default_sensor_value">N/A</string>
+    <string name="dashboard_default_sensor_value">-</string>
 
 
 
