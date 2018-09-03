@@ -56,7 +56,7 @@ public class CommandParser {
     public static int getDisarmAlarmId(String alarmDisarmResponse) {
         int indexOfAlarmId = alarmDisarmResponse.indexOf(" ") + 1;
         String alarmId = alarmDisarmResponse.substring(indexOfAlarmId);                             //  "ALARM_DISARM " is trimmed.
-        return Integer.valueOf(alarmDisarmResponse);
+        return Integer.valueOf(alarmId);
     }
 
     //  getClockResponse                = "CLOCK_GET 2018 9 2 14 50 0"

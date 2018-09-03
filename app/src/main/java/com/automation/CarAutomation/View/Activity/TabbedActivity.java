@@ -1,5 +1,6 @@
 package com.automation.CarAutomation.View.Activity;
 
+import com.automation.CarAutomation.Controller.App;
 import com.automation.CarAutomation.Controller.BluetoothCommunicationThread;
 import com.automation.CarAutomation.Controller.CommandParser;
 import com.automation.CarAutomation.Model.Alarm;
@@ -11,6 +12,7 @@ import com.automation.CarAutomation.View.Fragment.AlarmFragment;
 import com.automation.CarAutomation.View.Fragment.DashboardFragment;
 import com.automation.CarAutomation.View.Fragment.SettingsFragment;
 import android.annotation.SuppressLint;
+import android.app.AlertDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Handler;
@@ -32,6 +34,8 @@ import java.util.TimerTask;
 
 public class TabbedActivity extends AppCompatActivity {
 
+    public static Context mContext;
+
     ArduinoVariableContainer arduinoVariableContainer = ArduinoVariableContainer.getInstance();
     BluetoothContainer bluetoothContainer = BluetoothContainer.getInstance();
     SharedPreferencesContainer sharedPreferencesContainer = SharedPreferencesContainer.getInstance();
@@ -41,6 +45,8 @@ public class TabbedActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tabbed);
+
+        mContext = this;
 
         initBluetoothCommunicationHandler();
         bluetoothContainer.bluetoothCommunicationThread = new BluetoothCommunicationThread(bluetoothContainer.bluetoothSocket);

@@ -1,6 +1,8 @@
 package com.automation.CarAutomation.Controller;
 
+import android.app.ActivityManager;
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
@@ -27,6 +29,7 @@ public class AlarmViewHolder extends RecyclerView.ViewHolder implements View.OnC
     private TextView tvAlarmRelayName;
     private TextView tvDateTime;
     private ImageView ivDeleteIcon;
+    public AlertDialog.Builder alertDialogBuilder;
 
     public AlarmViewHolder(View itemView) {
         super(itemView);
@@ -35,6 +38,9 @@ public class AlarmViewHolder extends RecyclerView.ViewHolder implements View.OnC
         tvDateTime          = itemView.findViewById(R.id.tv_date_time);
         ivDeleteIcon        = itemView.findViewById(R.id.iv_delete_alarm);
         ivDeleteIcon.setOnClickListener(this);
+
+
+        alertDialogBuilder = new AlertDialog.Builder( TabbedActivity.mContext );
     }
 
     public void setUserInterfaceData(Alarm alarmItem) {
@@ -82,8 +88,8 @@ public class AlarmViewHolder extends RecyclerView.ViewHolder implements View.OnC
 
     private void displayAlertDialog() {
 
-
-        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder( App.getContext() );
+        //  ((ActivityManager) itemView.getContext().getSystemService(Context.ACTIVITY_SERVICE)).getRunningTasks(1).get(0).topActivity.getClassName()
+        //  ((ActivityManager) itemView.getContext().getSystemService(Context.ACTIVITY_SERVICE)).getAppTasks().get(0).getTaskInfo().baseActivity
 
         alertDialogBuilder.setTitle("Warning!");
 
