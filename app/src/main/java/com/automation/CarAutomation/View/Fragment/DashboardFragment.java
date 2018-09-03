@@ -27,15 +27,12 @@ import com.automation.CarAutomation.R;
 
 public class DashboardFragment extends Fragment {
 
-    private FragmentActivity listener;
-
     public DashboardFragment() { }
 
     public View rootView;
 
     SharedPreferencesContainer sharedPreferencesContainer   = SharedPreferencesContainer.getInstance();
     BluetoothContainer bluetoothContainer                   = BluetoothContainer.getInstance();
-    TimerController timerController = TimerController.getInstance();
 
     public TextView tvVoltageValue;
     public TextView tvCurrentValue;
@@ -47,10 +44,10 @@ public class DashboardFragment extends Fragment {
 
         rootView = inflater.inflate(R.layout.fragment_dashboard, container, false);
 
-        tvVoltageValue = rootView.findViewById(R.id.tv_voltage_value);
-        tvCurrentValue = rootView.findViewById(R.id.tv_current_value);
-        tvTemperatureValue = rootView.findViewById(R.id.tv_temperature_value);
-        tvConnectedDeviceName = rootView.findViewById(R.id.tv_connected_device_name);
+        tvVoltageValue          = rootView.findViewById(R.id.tv_voltage_value);
+        tvCurrentValue          = rootView.findViewById(R.id.tv_current_value);
+        tvTemperatureValue      = rootView.findViewById(R.id.tv_temperature_value);
+        tvConnectedDeviceName   = rootView.findViewById(R.id.tv_connected_device_name);
 
 
         initConnectedDeviceName();
@@ -70,7 +67,6 @@ public class DashboardFragment extends Fragment {
     public void onResume() {
         super.onResume();
         Log.e(" DF_onResume",String.valueOf(getActivity().getSupportFragmentManager().getFragments().size()));
-        timerController.startTimer("pg ;", 5000);
     }
 
     @Override
@@ -181,15 +177,5 @@ public class DashboardFragment extends Fragment {
         //  android.app.AlertDialog alertDialog = alertDialogBuilder.create();
         alertDialogBuilder.show();
     }// displayAlertDialogForEditingRelayLabel()
-
-    private void enableSwitchCompat( boolean enable ){
-
-        for(int switchCompatId=R.id.sw_relay_1; switchCompatId <= R.id.sw_relay_4; switchCompatId++) {
-
-            SwitchCompat switchCompat = rootView.findViewById(switchCompatId);
-            switchCompat.setEnabled(enable);
-
-        }// for
-    }
 
 }// DashboardFragment

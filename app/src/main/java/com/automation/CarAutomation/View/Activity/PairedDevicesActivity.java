@@ -2,9 +2,7 @@ package com.automation.CarAutomation.View.Activity;
 
 import android.app.Activity;
 import android.bluetooth.BluetoothDevice;
-import android.content.Context;
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.support.v7.app.AlertDialog;
 import android.os.Bundle;
 import android.util.Log;
@@ -56,7 +54,6 @@ public class PairedDevicesActivity extends Activity {
                     Log.e("PairedDeviceActivity", "CONNECTION_FAILED");
                     Toast.makeText(App.getContext(), "Connection failed.", Toast.LENGTH_LONG).show();
                 }
-
             }
         });
 

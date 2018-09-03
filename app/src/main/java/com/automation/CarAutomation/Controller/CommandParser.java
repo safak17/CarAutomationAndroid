@@ -22,10 +22,10 @@ public class CommandParser {
         return relayOperateData;
     }
 
-    //  peripheralGetResponse           = "PERIPHERAL_GET 22 10 30"
+    //  peripheralGetResponse           = "PERIPHERAL_GET 4 22 10 30"
     public static String[] getPeripheralData(String peripheralGetResponse) {
-        int indexOfTemperatureValue = peripheralGetResponse.indexOf(" ") + 1;
-        peripheralGetResponse = peripheralGetResponse.substring(indexOfTemperatureValue);           //  "PERIPHERAL_GET " is trimmed.
+        int indexOfRelayStatus  = peripheralGetResponse.indexOf(" ") + 1;
+        peripheralGetResponse   = peripheralGetResponse.substring(indexOfRelayStatus);              //  "PERIPHERAL_GET " is trimmed.
         String peripheralData[] = peripheralGetResponse.split(" ");
         return peripheralData;
     }

@@ -11,19 +11,25 @@ public class ArduinoVariableContainer {
     }
 
     //  In order to see the unit when app first installed.
+    public float temperature;
     public float temperatureA = 1;
     public float temperatureB = 0;
     public String temperatureUnit = "°C";
 
     //  In order to see the unit when app first installed.
+    public float current;
     public float currentA = 1;
     public float currentB = 0;
     public String currentUnit = "A";
 
     //  In order to see the unit when app first installed.
+    public float voltage;
     public float voltageA = 1;
     public float voltageB = 0;
     public String voltageUnit = "V";
+
+
+    public String dateTimeOfRealTimeClock = "-1";
 
     public int alarmListSize = -1;
     public ArrayList<Alarm> alarmList = new ArrayList<>();

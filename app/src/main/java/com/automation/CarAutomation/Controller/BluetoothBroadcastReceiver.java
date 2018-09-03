@@ -27,7 +27,6 @@ public class BluetoothBroadcastReceiver extends BroadcastReceiver {
 
         if ( "android.bluetooth.device.action.ACL_CONNECTED".equals(intent.getAction())){
             try {
-
                 if( bluetoothContainer.bluetoothSocket.isConnected())
                     showActivity(context, tabbedActivity);
             }catch (Exception e){ Log.e("BroadcastReceiverERROR", "ACL_CONNECTED"); }
@@ -35,7 +34,6 @@ public class BluetoothBroadcastReceiver extends BroadcastReceiver {
         else if ( "android.bluetooth.device.action.ACL_DISCONNECTED".equals(intent.getAction())){
             try {
                 Log.e("BroadcastReceiver", "ACL_DISCONNECTED");
-                //  Neden bu çıkmıyor ?
                 Toast.makeText(context,"Bluetooth is disconnected!", Toast.LENGTH_LONG).show();
                 showActivity(context, pairedDevicesActivity);
             }catch (Exception e){ Log.e("BroadcastReceiverERROR", "ACL_DISCONNECTED"); }
@@ -58,5 +56,4 @@ public class BluetoothBroadcastReceiver extends BroadcastReceiver {
         i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         context.startActivity(i);
     }
-
 }
