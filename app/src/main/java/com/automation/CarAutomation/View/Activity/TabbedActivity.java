@@ -214,7 +214,7 @@ public class TabbedActivity extends AppCompatActivity {
             AlarmFragment alarmFragment = (AlarmFragment)getSupportFragmentManager().findFragmentByTag("android:switcher:" + mViewPager.getId() + ":" + mViewPager.getCurrentItem());
             alarmFragment.alarmAdapter.notifyDataSetChanged();
 
-            if( arduinoVariableContainer.alarmListSize == 0 )
+            if( arduinoVariableContainer.alarmList.size() == 0 )
                 alarmFragment.showEmptyAlarmListScreen();
             else
                 alarmFragment.showAlarmList();
