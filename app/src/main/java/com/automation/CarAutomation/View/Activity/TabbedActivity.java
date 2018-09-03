@@ -25,10 +25,7 @@ import android.support.v4.view.ViewPager;
 import android.os.Bundle;
 import android.support.v7.widget.SwitchCompat;
 import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
-import java.util.List;
 import java.util.Locale;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -73,16 +70,19 @@ public class TabbedActivity extends AppCompatActivity {
                 stoptimertask();
 
                 if ( tab.getText().equals("Dashboard") ) {
-                    startTimer("pg ;", 5000);
+                    startTimer("pg ;", 2000);
+                    Log.e(" TA_Dashboard", "pg ;");
                 }
 
                 else if ( tab.getText().equals("Alarm")) {
-                    startTimer("al ;", 5000);
+                    startTimer("al ;", 2000);
+                    Log.e(" TA_Alarm", "al ;");
                     fabAddAlarm.setVisibility(View.VISIBLE);
                 }
 
                 else if ( tab.getText().equals("Settıngs") ){
                     startTimer("cg ;", 1000);
+                    Log.e(" TA_Settings", "cg ;");
                 }
 
 
@@ -169,46 +169,28 @@ public class TabbedActivity extends AppCompatActivity {
     }
 
     public void UpdateDashboardUI(){
-        DashboardFragment dashboardFragment = (DashboardFragment) FindFragment("fragment_dashboard");
 
-        dashboardFragment.tvTemperatureValue.setText(String.format(Locale.getDefault(),"%.2f", arduinoVariableContainer.temperature));
-        dashboardFragment.tvCurrentValue.setText(String.format(Locale.getDefault(),"%.2f", arduinoVariableContainer.current));
-        dashboardFragment.tvVoltageValue.setText(String.format(Locale.getDefault(),"%.2f", arduinoVariableContainer.voltage));
+        try{
+            DashboardFragment dashboardFragment = (DashboardFragment)getSupportFragmentManager().findFragmentByTag("android:switcher:" + mViewPager.getId() + ":" + mViewPager.getCurrentItem());
+
+            dashboardFragment.tvTemperatureValue.setText(String.format(Locale.getDefault(),"%.2f", arduinoVariableContainer.temperature));
+            dashboardFragment.tvCurrentValue.setText(String.format(Locale.getDefault(),"%.2f", arduinoVariableContainer.current));
+            dashboardFragment.tvVoltageValue.setText(String.format(Locale.getDefault(),"%.2f", arduinoVariableContainer.voltage));
+        }catch (Exception e) { }
     }
 
     private void UpdateSettingsUI(){
-        SettingsFragment settingsFragment = (SettingsFragment) FindFragment("fragment_settings");
-        settingsFragment.tvRealtimeClock.setText(arduinoVariableContainer.dateTimeOfRealTimeClock);
+        try{
+            SettingsFragment settingsFragment = (SettingsFragment) getSupportFragmentManager().findFragmentByTag("android:switcher:" + mViewPager.getId() + ":" + mViewPager.getCurrentItem());
+            settingsFragment.tvRealtimeClock.setText(arduinoVariableContainer.dateTimeOfRealTimeClock);
+        }catch (Exception e) { }
     }
 
     private void UpdateAlarmUI(){
-        AlarmFragment alarmFragment = (AlarmFragment) FindFragment("fragment_alarm");
-        alarmFragment.alarmAdapter.notifyDataSetChanged();
-    }
-
-    private Fragment FindFragment(String fragmentName){
-        List<Fragment> listOfFragments = getSupportFragmentManager().getFragments();
-
-
-        if( fragmentName.equals("fragment_dashboard")){
-            for (int i = 0; i < listOfFragments.size(); i++)
-                if (listOfFragments.get(i) instanceof DashboardFragment)
-                    return listOfFragments.get(i);
-        }
-
-        if( fragmentName.equals("fragment_alarm")){
-            for (int i = 0; i < listOfFragments.size(); i++)
-                if (listOfFragments.get(i) instanceof AlarmFragment)
-                    return listOfFragments.get(i);
-        }
-
-        if( fragmentName.equals("fragment_settings")){
-            for (int i = 0; i < listOfFragments.size(); i++)
-                if (listOfFragments.get(i) instanceof SettingsFragment)
-                    return listOfFragments.get(i);
-        }
-
-        return null;
+        try{
+            AlarmFragment alarmFragment = (AlarmFragment)getSupportFragmentManager().findFragmentByTag("android:switcher:" + mViewPager.getId() + ":" + mViewPager.getCurrentItem());
+            alarmFragment.alarmAdapter.notifyDataSetChanged();
+        }catch (Exception e) { }
     }
 
 
@@ -235,7 +217,7 @@ public class TabbedActivity extends AppCompatActivity {
                                 arduinoVariableContainer.temperatureA       = sharedPreferencesContainer.get_a_value_of("temperature");
                                 arduinoVariableContainer.temperatureB       = sharedPreferencesContainer.get_b_value_of("temperature");
                                 arduinoVariableContainer.temperatureUnit    = sharedPreferencesContainer.get_unit_of("temperature");
-                                arduinoVariableContainer.temperature        = arduinoVariableContainer.temperature * temperatureMeasurement + arduinoVariableContainer.temperatureB;
+                                arduinoVariableContainer.temperature        = arduinoVariableContainer.temperatureA * temperatureMeasurement + arduinoVariableContainer.temperatureB;
 
                                 Float currentMeasurement                    = Float.valueOf(peripheralData[2]);
                                 arduinoVariableContainer.currentA           = sharedPreferencesContainer.get_a_value_of("current");
@@ -311,14 +293,13 @@ public class TabbedActivity extends AppCompatActivity {
                                         break;
                                     }
 
-
                                 UpdateAlarmUI();
 
                             } // if (command.startsWith("ALARM_DISARM"))
                         }// if( commandResponse.startsWith("OK")
 
                         else {
-                            Log.e("ERROR COMMAND ", "else");
+                            Log.e("TA_Command_Error ", commandResponse);
                         }
                     }// for( String command : commandResponseList )
                 }

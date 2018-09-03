@@ -24,18 +24,17 @@ public class SettingsFragment extends Fragment {public SettingsFragment() { }
     SharedPreferencesContainer sharedPreferencesContainer   = SharedPreferencesContainer.getInstance();
     BluetoothContainer bluetoothContainer                   = BluetoothContainer.getInstance();
 
-    //  TODO: SharedPreferences kaydedilmesi.
     public TextView tvRealtimeClock;
-    TextView tvTemperature, tvCurrent, tvVoltage;
-    EditText editTextList[] = new EditText[9];
-    Button btnSyncRealtimeClock;
+    public TextView tvTemperature, tvCurrent, tvVoltage;
+    public EditText editTextList[] = new EditText[9];
+    public Button btnSyncRealtimeClock;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
         rootView = inflater.inflate(R.layout.fragment_settings, container, false);
 
-        initTextViews();
+        getTextViewsFromLayout();
         initEditTexts();
 
         btnSyncRealtimeClock = rootView.findViewById(R.id.btn_sync_rtc);
@@ -61,7 +60,6 @@ public class SettingsFragment extends Fragment {public SettingsFragment() { }
 
     public void syncRealtimeClock() {
 
-        //  Get the Android's time.
         Calendar calendar = Calendar.getInstance();
 
         String setClockMessage = "cs "
@@ -76,39 +74,44 @@ public class SettingsFragment extends Fragment {public SettingsFragment() { }
     }
 
     public void setEditTextFromSharedPreferences() {
+        editTextList[0] = rootView.findViewById(R.id.et_a_value_temperature);
+        editTextList[0].setText(String.valueOf(sharedPreferencesContainer.get_a_value_of("temperature")));
 
-        for( final EditText editText : editTextList ){
+        editTextList[1] = rootView.findViewById(R.id.et_b_value_temperature);
+        editTextList[1].setText(String.valueOf(sharedPreferencesContainer.get_b_value_of("temperature")));
 
-            String sharedPreferencesKey = String.valueOf(editText.getId());
+        editTextList[2] = rootView.findViewById(R.id.et_temperature_unit);
+        editTextList[2].setText(String.valueOf(sharedPreferencesContainer.get_unit_of("temperature")));
 
-            if( editText.getTag().toString().startsWith("unit"))
-                editText.setText(sharedPreferencesContainer.settings.getString(sharedPreferencesKey, "Unit"));
-            else
-                editText.setText(String.valueOf(sharedPreferencesContainer.settings.getFloat(sharedPreferencesKey, 0.0f)));
-        }
+        editTextList[3] = rootView.findViewById(R.id.et_a_value_current);
+        editTextList[3].setText(String.valueOf(sharedPreferencesContainer.get_a_value_of("current")));
+
+        editTextList[4] = rootView.findViewById(R.id.et_b_value_current);
+        editTextList[4].setText(String.valueOf(sharedPreferencesContainer.get_b_value_of("current")));
+
+        editTextList[5] = rootView.findViewById(R.id.et_current_unit);
+        editTextList[5].setText(String.valueOf(sharedPreferencesContainer.get_unit_of("current")));
+
+        editTextList[6] = rootView.findViewById(R.id.et_a_value_voltage);
+        editTextList[6].setText(String.valueOf(sharedPreferencesContainer.get_a_value_of("voltage")));
+
+        editTextList[7] = rootView.findViewById(R.id.et_b_value_voltage);
+        editTextList[7].setText(String.valueOf(sharedPreferencesContainer.get_b_value_of("voltage")));
+
+        editTextList[8] = rootView.findViewById(R.id.et_voltage_unit);
+        editTextList[8].setText(String.valueOf(sharedPreferencesContainer.get_unit_of("voltage")));
     }
 
-    private void initTextViews(){
-        tvTemperature = rootView.findViewById(R.id.tv_settings_temperature);
-        tvCurrent = rootView.findViewById(R.id.tv_settings_current);
-        tvVoltage = rootView.findViewById(R.id.tv_settings_voltage);
+    private void getTextViewsFromLayout(){
+        tvTemperature   = rootView.findViewById(R.id.tv_settings_temperature);
+        tvCurrent       = rootView.findViewById(R.id.tv_settings_current);
+        tvVoltage       = rootView.findViewById(R.id.tv_settings_voltage);
         tvRealtimeClock = rootView.findViewById(R.id.tv_realtime_clock);
     }
 
-    private void initEditTexts()
-    {
-        editTextList[0] = rootView.findViewById(R.id.et_a_value_temperature);
-        editTextList[1] = rootView.findViewById(R.id.et_b_value_temperature);
-        editTextList[2] = rootView.findViewById(R.id.editText_temperature_unit);
+    private void initEditTexts() {
 
-        editTextList[3] = rootView.findViewById(R.id.et_a_value_current);
-        editTextList[4] = rootView.findViewById(R.id.et_b_value_current);
-        editTextList[5] = rootView.findViewById(R.id.editText_current_unit);
-
-        editTextList[6] = rootView.findViewById(R.id.et_a_value_voltage);
-        editTextList[7] = rootView.findViewById(R.id.et_b_value_voltage);
-        editTextList[8] = rootView.findViewById(R.id.editText_voltage_unit);
-
+        setEditTextFromSharedPreferences();
 
         for( final EditText editText : editTextList )
             editText.setOnFocusChangeListener(new View.OnFocusChangeListener() {
@@ -116,7 +119,7 @@ public class SettingsFragment extends Fragment {public SettingsFragment() { }
                 public void onFocusChange(View view, boolean focus) {
                     if(!focus) {
 
-                        String sharedPreferencesKey = String.valueOf(editText.getId());
+                        String sharedPreferencesKey = String.valueOf(editText.getTag());
 
                         if( editText.getTag().toString().startsWith("unit"))
                             sharedPreferencesContainer.editor.putString( sharedPreferencesKey, editText.getText().toString());
@@ -127,7 +130,5 @@ public class SettingsFragment extends Fragment {public SettingsFragment() { }
                     }
                 }
             });
-
-        setEditTextFromSharedPreferences();
     }
 }

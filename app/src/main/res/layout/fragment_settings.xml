@@ -110,8 +110,8 @@
 
                 <EditText
                     android:id="@+id/et_b_value_temperature"
-                    android:layout_width="60dp"
                     android:tag="b_value_temperature"
+                    android:layout_width="60dp"
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="10dp"
                     android:ems="10"
@@ -122,7 +122,7 @@
                     android:textAlignment="center" />
 
                 <EditText
-                    android:id="@+id/editText_temperature_unit"
+                    android:id="@+id/et_temperature_unit"
                     android:tag="unit_temperature"
                     android:layout_width="50dp"
                     android:layout_height="wrap_content"
@@ -175,8 +175,8 @@
 
                 <EditText
                     android:id="@+id/et_b_value_current"
-                    android:layout_width="60dp"
                     android:tag="b_value_current"
+                    android:layout_width="60dp"
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="10dp"
                     android:ems="10"
@@ -187,7 +187,7 @@
                     android:textAlignment="center" />
 
                 <EditText
-                    android:id="@+id/editText_current_unit"
+                    android:id="@+id/et_current_unit"
                     android:tag="unit_current"
                     android:layout_width="50dp"
                     android:layout_height="wrap_content"
@@ -226,8 +226,8 @@
 
                 <EditText
                     android:id="@+id/et_a_value_voltage"
-                    android:layout_width="60dp"
                     android:tag="a_value_voltage"
+                    android:layout_width="60dp"
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="10dp"
                     android:layout_marginStart="10dp"
@@ -240,8 +240,8 @@
 
                 <EditText
                     android:id="@+id/et_b_value_voltage"
-                    android:layout_width="60dp"
                     android:tag="b_value_voltage"
+                    android:layout_width="60dp"
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="10dp"
                     android:ems="10"
@@ -252,7 +252,7 @@
                     android:textAlignment="center" />
 
                 <EditText
-                    android:id="@+id/editText_voltage_unit"
+                    android:id="@+id/et_voltage_unit"
                     android:tag="unit_voltage"
                     android:layout_width="50dp"
                     android:layout_height="wrap_content"

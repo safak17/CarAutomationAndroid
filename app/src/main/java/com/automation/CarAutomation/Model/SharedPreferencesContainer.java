@@ -1,6 +1,5 @@
 package com.automation.CarAutomation.Model;
 
-import android.content.Context;
 import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 
@@ -34,7 +33,7 @@ public class SharedPreferencesContainer extends AppCompatActivity {
     }
 
     public String get_unit_of(String peripheralName){
-        if(peripheralName.equals("temperature"))    return settings.getString("unit_temperature", "C");
+        if(peripheralName.equals("temperature"))    return settings.getString("unit_temperature", "°C");
         if(peripheralName.equals("current"))        return settings.getString("unit_current", "A");
         if(peripheralName.equals("voltage"))        return settings.getString("unit_voltage", "V");
 
