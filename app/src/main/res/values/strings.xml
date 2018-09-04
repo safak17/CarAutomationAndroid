@@ -1,0 +1,36 @@
+<resources>
+    <string name="app_name">CarAutomation</string>
+    <string name="tab_item_dashboard_text">Dashboard</string>
+    <string name="tab_item_bluetooth_text">Bluetooth</string>
+    <string name="tab_item_alarm_text">Alarm</string>
+    <string name="tab_item_settings_text">Settıngs</string>
+
+    <string name="cb_alarm_repeat">Repeat</string>
+    <string name="cb_relay_on">On</string>
+    <string name="cb_relay_off">Off</string>
+    <string-array name="days_of_week">
+        <item>Pazartesi</item>
+        <item>Salı</item>
+        <item>Çarşamba</item>
+        <item>Perşembe</item>
+        <item>Cuma</item>
+        <item>Cumartesi</item>
+        <item>Pazar</item>
+    </string-array>
+
+    <string name="dashboard_default_sensor_value">-</string>
+
+
+
+    <string name="settings_analog_pin_temperature_label">Sıcaklık</string>
+    <string name="settings_analog_pin_current_label">Akım</string>
+    <string name="settings_analog_pin_voltage_label">Gerilim</string>
+
+    <string name="settings_seonsor" translatable="false">Ad</string>
+    <string name="settings_a_value_label" translatable="false">Çarpan</string>
+    <string name="settings_b_value_label" translatable="false">Taban</string>
+
+    <string name="settings_unit_label">Birim</string>
+
+
+</resources>
