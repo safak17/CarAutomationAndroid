@@ -1,13 +1,9 @@
 <resources>
     <string name="app_name">CarAutomation</string>
-    <string name="tab_item_dashboard_text">Dashboard</string>
-    <string name="tab_item_bluetooth_text">Bluetooth</string>
+    <string name="tab_item_dashboard_text">Panel</string>
     <string name="tab_item_alarm_text">Alarm</string>
-    <string name="tab_item_settings_text">Settıngs</string>
+    <string name="tab_item_settings_text">Ayarlar</string>
 
-    <string name="cb_alarm_repeat">Repeat</string>
-    <string name="cb_relay_on">On</string>
-    <string name="cb_relay_off">Off</string>
     <string-array name="days_of_week">
         <item>Pazartesi</item>
         <item>Salı</item>
@@ -19,6 +15,8 @@
     </string-array>
 
     <string name="dashboard_default_sensor_value">-</string>
+
+    <string name="paired_devices_activity_title">Eşleşen Cihazlar</string>
 
 
 

@@ -1,6 +1,7 @@
 package com.automation.CarAutomation.Controller;
 import com.automation.CarAutomation.Model.BluetoothContainer;
 import com.automation.CarAutomation.View.Activity.PairedDevicesActivity;
+import com.automation.CarAutomation.View.Activity.TabbedActivity;
 
 import android.app.Activity;
 import android.app.ActivityManager;
@@ -35,7 +36,12 @@ public class BluetoothBroadcastReceiver extends BroadcastReceiver {
             try {
                 Log.e("BroadcastReceiver", "ACL_DISCONNECTED");
                 Toast.makeText(context,"Bluetooth is disconnected!", Toast.LENGTH_LONG).show();
-                showActivity(context, pairedDevicesActivity);
+                //showActivity(context, pairedDevicesActivity);
+                Intent i = new Intent();
+                i.setClassName("com.automation.CarAutomation", pairedDevicesActivity);
+                i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK| Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_TASK_ON_HOME);
+                context.startActivity(i);
+
             }catch (Exception e){ Log.e("BroadcastReceiverERROR", "ACL_DISCONNECTED"); }
         }
         else if ( "android.bluetooth.adapter.action.STATE_CHANGED".equals(intent.getAction())) {
@@ -45,7 +51,11 @@ public class BluetoothBroadcastReceiver extends BroadcastReceiver {
                 try {
                     bluetoothContainer.bluetoothCommunicationThread.cancel();
                 }catch (Exception e) {Log.e("BroadscastReceiver", "State_OFF_ERROR");}
-                showActivity(context, pairedDevicesActivity);
+                //showActivity(context, pairedDevicesActivity);
+                Intent i = new Intent();
+                i.setClassName("com.automation.CarAutomation", pairedDevicesActivity);
+                i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK| Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_TASK_ON_HOME);
+                context.startActivity(i);
             }
         }
     }

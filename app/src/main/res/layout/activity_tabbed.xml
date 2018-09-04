@@ -54,7 +54,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|end"
         android:layout_margin="20dp"
-        android:visibility="visible"
+        android:visibility="gone"
         android:src="@drawable/ic_alarm_add_white" />
 
 

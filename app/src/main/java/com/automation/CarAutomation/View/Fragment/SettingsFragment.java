@@ -3,6 +3,7 @@ package com.automation.CarAutomation.View.Fragment;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.CardView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -28,7 +29,7 @@ public class SettingsFragment extends Fragment {public SettingsFragment() { }
     public TextView tvRealtimeClock;
     public TextView tvTemperature, tvCurrent, tvVoltage;
     public EditText editTextList[] = new EditText[9];
-    public Button btnSyncRealtimeClock;
+    public CardView cvSyncRealtimeClock;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -38,8 +39,8 @@ public class SettingsFragment extends Fragment {public SettingsFragment() { }
         getTextViewsFromLayout();
         initEditTexts();
 
-        btnSyncRealtimeClock = rootView.findViewById(R.id.btn_sync_rtc);
-        btnSyncRealtimeClock.setOnClickListener(new View.OnClickListener() {
+        cvSyncRealtimeClock = rootView.findViewById(R.id.cv_sync_rtc);
+        cvSyncRealtimeClock.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) { syncRealtimeClock(); }
         });

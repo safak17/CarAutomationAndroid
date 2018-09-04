@@ -11,6 +11,7 @@ import com.automation.CarAutomation.R;
 import com.automation.CarAutomation.View.Fragment.AlarmFragment;
 import com.automation.CarAutomation.View.Fragment.DashboardFragment;
 import com.automation.CarAutomation.View.Fragment.SettingsFragment;
+
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.content.Context;
@@ -28,6 +29,7 @@ import android.os.Bundle;
 import android.support.v7.widget.SwitchCompat;
 import android.util.Log;
 import android.view.View;
+
 import java.util.Locale;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -41,6 +43,7 @@ public class TabbedActivity extends AppCompatActivity {
     SharedPreferencesContainer sharedPreferencesContainer = SharedPreferencesContainer.getInstance();
 
     ViewPager mViewPager;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -56,7 +59,7 @@ public class TabbedActivity extends AppCompatActivity {
         fabAddAlarm.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent( TabbedActivity.this , AlarmActivity.class);
+                Intent intent = new Intent(TabbedActivity.this, AlarmActivity.class);
                 startActivity(intent);
             }
         });
@@ -76,18 +79,14 @@ public class TabbedActivity extends AppCompatActivity {
 
                 stoptimertask();
 
-                if ( tab.getText().equals("Dashboard") ) {
+                if (tab.getText().equals("Dashboard")) {
                     startTimer("pg ;", 2000);
                     Log.e(" TA_Dashboard", "pg ;");
-                }
-
-                else if ( tab.getText().equals("Alarm")) {
+                } else if (tab.getText().equals("Alarm")) {
                     Log.e(" TA_Alarm", "al ;");
                     bluetoothContainer.bluetoothCommunicationThread.write("al ;");
                     fabAddAlarm.setVisibility(View.VISIBLE);
-                }
-
-                else if ( tab.getText().equals("Settıngs") ){
+                } else if (tab.getText().equals("Settıngs")) {
                     startTimer("cg ;", 2000);
                     Log.e(" TA_Settings", "cg ;");
                 }
@@ -97,7 +96,7 @@ public class TabbedActivity extends AppCompatActivity {
 
             @Override
             public void onTabUnselected(TabLayout.Tab tab) {
-                if( tab.getText().equals("Alarm"))
+                if (tab.getText().equals("Alarm"))
                     fabAddAlarm.setVisibility(View.GONE);
             }
 
@@ -115,39 +114,42 @@ public class TabbedActivity extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
-        Log.e(" TA_onStart",String.valueOf((getSupportFragmentManager().getFragments().size())));
+
+        mViewPager.setCurrentItem(0);
+        Log.e(" TA_onStart", String.valueOf((getSupportFragmentManager().getFragments().size())));
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-        Log.e(" TA_onResume",String.valueOf((getSupportFragmentManager().getFragments().size())));
+        Log.e(" TA_onResume", String.valueOf((getSupportFragmentManager().getFragments().size())));
+        // mViewPager.setCurrentItem(0);
 
     }
 
     @Override
     protected void onPause() {
         super.onPause();
-        Log.e(" TA_onPause",String.valueOf((getSupportFragmentManager().getFragments().size())));
+        Log.e(" TA_onPause", String.valueOf((getSupportFragmentManager().getFragments().size())));
     }
 
     @Override
     protected void onStop() {
         super.onStop();
-        Log.e(" TA_onStop",String.valueOf((getSupportFragmentManager().getFragments().size())));
+        Log.e(" TA_onStop", String.valueOf((getSupportFragmentManager().getFragments().size())));
     }
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        Log.e(" TA_onDestroy",String.valueOf((getSupportFragmentManager().getFragments().size())));
+        Log.e(" TA_onDestroy", String.valueOf((getSupportFragmentManager().getFragments().size())));
 
         try {
             bluetoothContainer.bluetoothCommunicationThread.cancel();
             Log.e("TA", "onDestroyBtClose");
-        }catch (Exception e) {}
+        } catch (Exception e) {
+        }
     }
-
 
 
     public class SectionsPagerAdapter extends FragmentPagerAdapter {
@@ -172,20 +174,23 @@ public class TabbedActivity extends AppCompatActivity {
         }
 
         @Override
-        public int getCount() { return 3; }
+        public int getCount() {
+            return 3;
+        }
     }
 
-    public void UpdateDashboardUI(){
+    public void UpdateDashboardUI() {
 
-        try{
-            DashboardFragment dashboardFragment = (DashboardFragment)getSupportFragmentManager().findFragmentByTag("android:switcher:" + mViewPager.getId() + ":" + mViewPager.getCurrentItem());
+        try {
+            DashboardFragment dashboardFragment = (DashboardFragment) getSupportFragmentManager().findFragmentByTag("android:switcher:" + mViewPager.getId() + ":" + mViewPager.getCurrentItem());
 
             updateRelayStatus(arduinoVariableContainer.statusOfRelays, dashboardFragment);
 
-            dashboardFragment.tvTemperatureValue.setText(String.format(Locale.getDefault(),"%.2f", arduinoVariableContainer.temperature) + " " + arduinoVariableContainer.temperatureUnit);
-            dashboardFragment.tvCurrentValue.setText(String.format(Locale.getDefault(),"%.2f", arduinoVariableContainer.current) + " " + arduinoVariableContainer.currentUnit);
-            dashboardFragment.tvVoltageValue.setText(String.format(Locale.getDefault(),"%.2f", arduinoVariableContainer.voltage) + " " + arduinoVariableContainer.voltageUnit);
-        }catch (Exception e) { }
+            dashboardFragment.tvTemperatureValue.setText(String.format(Locale.getDefault(), "%.2f", arduinoVariableContainer.temperature) + " " + arduinoVariableContainer.temperatureUnit);
+            dashboardFragment.tvCurrentValue.setText(String.format(Locale.getDefault(), "%.2f", arduinoVariableContainer.current) + " " + arduinoVariableContainer.currentUnit);
+            dashboardFragment.tvVoltageValue.setText(String.format(Locale.getDefault(), "%.2f", arduinoVariableContainer.voltage) + " " + arduinoVariableContainer.voltageUnit);
+        } catch (Exception e) {
+        }
     }
 
     public void updateRelayStatus(int statusOfRelays, DashboardFragment dashboardFragment) {
@@ -195,30 +200,31 @@ public class TabbedActivity extends AppCompatActivity {
         for (int relayNumber = 1; relayNumber <= 4; relayNumber++) {
             isActive = ((statusOfRelays & relayMask) != 0) ? true : false;
 
-            ((SwitchCompat) dashboardFragment.rootView.findViewById( R.id.sw_relay_1 + relayNumber - 1)).setChecked(isActive);
+            ((SwitchCompat) dashboardFragment.rootView.findViewById(R.id.sw_relay_1 + relayNumber - 1)).setChecked(isActive);
 
             relayMask *= 2;
         }
     }
 
 
-    private void UpdateSettingsUI(){
-        try{
+    private void UpdateSettingsUI() {
+        try {
             SettingsFragment settingsFragment = (SettingsFragment) getSupportFragmentManager().findFragmentByTag("android:switcher:" + mViewPager.getId() + ":" + mViewPager.getCurrentItem());
             settingsFragment.tvRealtimeClock.setText(arduinoVariableContainer.dateTimeOfRealTimeClock);
-        }catch (Exception e) { }
+        } catch (Exception e) {
+        }
     }
 
-    private void UpdateAlarmUI(){
-        try{
-            AlarmFragment alarmFragment = (AlarmFragment)getSupportFragmentManager().findFragmentByTag("android:switcher:" + mViewPager.getId() + ":" + mViewPager.getCurrentItem());
+    private void UpdateAlarmUI() {
+        try {
+            AlarmFragment alarmFragment = (AlarmFragment) getSupportFragmentManager().findFragmentByTag("android:switcher:" + mViewPager.getId() + ":" + mViewPager.getCurrentItem());
             alarmFragment.alarmAdapter.notifyDataSetChanged();
 
-            if( arduinoVariableContainer.alarmList.size() == 0 )
+            if (arduinoVariableContainer.alarmList.size() == 0)
                 alarmFragment.showEmptyAlarmListScreen();
             else
                 alarmFragment.showAlarmList();
-        }catch (Exception e) {
+        } catch (Exception e) {
             Log.e("alarmAdapterError", e.getMessage());
         }
     }
@@ -234,94 +240,94 @@ public class TabbedActivity extends AppCompatActivity {
 
                     String[] commandResponseList = CommandParser.trimEndOfLineAndGetCommandResponseList(msg.obj);
 
-                    for( String commandResponse : commandResponseList ){
+                    for (String commandResponse : commandResponseList) {
 
-                        if(commandResponse.startsWith("OK")){
+                        if (commandResponse.startsWith("OK")) {
                             String command = CommandParser.trimResponseAndGetCommandFrom(commandResponse);
 
-                            if( command.startsWith("PERIPHERAL_GET")) {
+                            if (command.startsWith("PERIPHERAL_GET")) {
 
                                 String[] peripheralData = CommandParser.getPeripheralData(command);
 
-                                arduinoVariableContainer.statusOfRelays     = Integer.valueOf(peripheralData[0]);
+                                arduinoVariableContainer.statusOfRelays = Integer.valueOf(peripheralData[0]);
 
-                                Float temperatureMeasurement                = Float.valueOf(peripheralData[1]);
-                                arduinoVariableContainer.temperatureA       = sharedPreferencesContainer.get_a_value_of("temperature");
-                                arduinoVariableContainer.temperatureB       = sharedPreferencesContainer.get_b_value_of("temperature");
-                                arduinoVariableContainer.temperatureUnit    = sharedPreferencesContainer.get_unit_of("temperature");
-                                arduinoVariableContainer.temperature        = arduinoVariableContainer.temperatureA * temperatureMeasurement + arduinoVariableContainer.temperatureB;
+                                Float temperatureMeasurement = Float.valueOf(peripheralData[1]);
+                                arduinoVariableContainer.temperatureA = sharedPreferencesContainer.get_a_value_of("temperature");
+                                arduinoVariableContainer.temperatureB = sharedPreferencesContainer.get_b_value_of("temperature");
+                                arduinoVariableContainer.temperatureUnit = sharedPreferencesContainer.get_unit_of("temperature");
+                                arduinoVariableContainer.temperature = arduinoVariableContainer.temperatureA * temperatureMeasurement + arduinoVariableContainer.temperatureB;
 
-                                Float currentMeasurement                    = Float.valueOf(peripheralData[2]);
-                                arduinoVariableContainer.currentA           = sharedPreferencesContainer.get_a_value_of("current");
-                                arduinoVariableContainer.currentB           = sharedPreferencesContainer.get_b_value_of("current");
-                                arduinoVariableContainer.currentUnit        = sharedPreferencesContainer.get_unit_of("current");
-                                arduinoVariableContainer.current            = arduinoVariableContainer.currentA * currentMeasurement + arduinoVariableContainer.currentB;
+                                Float currentMeasurement = Float.valueOf(peripheralData[2]);
+                                arduinoVariableContainer.currentA = sharedPreferencesContainer.get_a_value_of("current");
+                                arduinoVariableContainer.currentB = sharedPreferencesContainer.get_b_value_of("current");
+                                arduinoVariableContainer.currentUnit = sharedPreferencesContainer.get_unit_of("current");
+                                arduinoVariableContainer.current = arduinoVariableContainer.currentA * currentMeasurement + arduinoVariableContainer.currentB;
 
-                                Float voltageMeasurement                    = Float.valueOf(peripheralData[3]);
-                                arduinoVariableContainer.voltageA           = sharedPreferencesContainer.get_a_value_of("voltage");
-                                arduinoVariableContainer.voltageB           = sharedPreferencesContainer.get_b_value_of("voltage");
-                                arduinoVariableContainer.voltageUnit        = sharedPreferencesContainer.get_unit_of("voltage");
-                                arduinoVariableContainer.voltage            = arduinoVariableContainer.voltageA * voltageMeasurement + arduinoVariableContainer.voltageB;
+                                Float voltageMeasurement = Float.valueOf(peripheralData[3]);
+                                arduinoVariableContainer.voltageA = sharedPreferencesContainer.get_a_value_of("voltage");
+                                arduinoVariableContainer.voltageB = sharedPreferencesContainer.get_b_value_of("voltage");
+                                arduinoVariableContainer.voltageUnit = sharedPreferencesContainer.get_unit_of("voltage");
+                                arduinoVariableContainer.voltage = arduinoVariableContainer.voltageA * voltageMeasurement + arduinoVariableContainer.voltageB;
 
                                 UpdateDashboardUI();
-                            }
-                            else if( command.startsWith("CLOCK_GET")){
+                            } else if (command.startsWith("CLOCK_GET")) {
 
-                                String[] clockDateTimeDataArray     = CommandParser.getClockDateTimeDataArray(command);
-                                String dateTimeOfRealTimeClock      =
+                                String[] clockDateTimeDataArray = CommandParser.getClockDateTimeDataArray(command);
+
+                                String dateTimeOfRealTimeClock =
+
                                         clockDateTimeDataArray[2] + "/"
                                                 + clockDateTimeDataArray[1] + "/"
                                                 + clockDateTimeDataArray[0] + "\n"
-                                                + clockDateTimeDataArray[3] + ":"
-                                                + clockDateTimeDataArray[4] + ":"
-                                                + clockDateTimeDataArray[5];
+                                                + String.format(
+                                                        Locale.getDefault(),
+                                                "%02d:%02d:%02d",
+                                                Integer.valueOf(clockDateTimeDataArray[3]),
+                                                Integer.valueOf(clockDateTimeDataArray[4]),
+                                                Integer.valueOf(clockDateTimeDataArray[5])
+                                        );
 
                                 arduinoVariableContainer.dateTimeOfRealTimeClock = dateTimeOfRealTimeClock;
                                 UpdateSettingsUI();
-                            }
-                            else if( command.startsWith("RELAY_OPERATE")) {
+                            } else if (command.startsWith("RELAY_OPERATE")) {
 
                                 Fragment page = getSupportFragmentManager().findFragmentByTag("android:switcher:" + mViewPager.getId() + ":" + mViewPager.getCurrentItem());
 
-                                String[] relayOperateData           = CommandParser.getRelayOperateData(command);
-                                int relayNumber                     = Integer.valueOf(relayOperateData[0]);
-                                boolean relayStatus                 = relayOperateData[1].equals("ACTIVE");
+                                String[] relayOperateData = CommandParser.getRelayOperateData(command);
+                                int relayNumber = Integer.valueOf(relayOperateData[0]);
+                                boolean relayStatus = relayOperateData[1].equals("ACTIVE");
 
                                 if (mViewPager.getCurrentItem() == 0 && page != null) {
-                                    SwitchCompat swRelay = ((DashboardFragment)page).rootView.findViewById(R.id.sw_relay_1 + relayNumber - 1);
+                                    SwitchCompat swRelay = ((DashboardFragment) page).rootView.findViewById(R.id.sw_relay_1 + relayNumber - 1);
                                     swRelay.setChecked(relayStatus);
                                 }
-                            }
-                            else if ( command.startsWith("ALARM_LIST_SIZE")){
+                            } else if (command.startsWith("ALARM_LIST_SIZE")) {
                                 arduinoVariableContainer.alarmList.clear();
                                 arduinoVariableContainer.alarmListSize = CommandParser.getAlarmListSize(command);
-                            }
-                            else if( command.startsWith("ALARM_LIST_ITEM")){
-                                Alarm alarm = new Alarm( CommandParser.getAlarmListItemData(command) );
+                            } else if (command.startsWith("ALARM_LIST_ITEM")) {
+                                Alarm alarm = new Alarm(CommandParser.getAlarmListItemData(command));
                                 arduinoVariableContainer.alarmList.add(alarm);
                                 UpdateAlarmUI();
-                            }
-                            else if( command.startsWith("ALARM_TRIGGERED")){
+                            } else if (command.startsWith("ALARM_TRIGGERED")) {
                                 int triggeredAlarmId = CommandParser.getTriggeredAlarmId(command);
 
                                 for (Alarm alarm : arduinoVariableContainer.alarmList)
                                     if (alarm.id == triggeredAlarmId && alarm.repeat != 1) {
                                         arduinoVariableContainer.alarmList.remove(alarm);
-                                        sharedPreferencesContainer.editor.remove( String.valueOf( "alarmId" + triggeredAlarmId ) );
+                                        sharedPreferencesContainer.editor.remove(String.valueOf("alarmId" + triggeredAlarmId));
                                         sharedPreferencesContainer.editor.commit();
                                         break;
                                     }
 
                                 UpdateAlarmUI();
-                            }
-                            else if( command.startsWith("ALARM_DISARM")){
+                            } else if (command.startsWith("ALARM_DISARM")) {
 
                                 int alarmID = CommandParser.getDisarmAlarmId(command);
 
                                 for (Alarm alarm : arduinoVariableContainer.alarmList)
                                     if (alarm.id == alarmID) {
                                         arduinoVariableContainer.alarmList.remove(alarm);
-                                        sharedPreferencesContainer.editor.remove( String.valueOf( "alarmId" + alarmID ) );
+                                        sharedPreferencesContainer.editor.remove(String.valueOf("alarmId" + alarmID));
                                         sharedPreferencesContainer.editor.commit();
                                         break;
                                     }
@@ -342,6 +348,7 @@ public class TabbedActivity extends AppCompatActivity {
 
     Timer timer;
     TimerTask timerTask;
+
     public void startTimer(String arduinoCommand, int periodInMilliseconds) {
         timer = new Timer();
 
@@ -359,6 +366,7 @@ public class TabbedActivity extends AppCompatActivity {
 
     //  We are going to use a handler to be able to run in our TimerTask
     final Handler handler = new Handler();
+
     public void initializeTimerTask(final String arduinoCommand) {
 
         timerTask = new TimerTask() {

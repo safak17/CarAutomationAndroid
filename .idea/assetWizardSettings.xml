@@ -18,9 +18,9 @@
                                 <PersistentState>
                                   <option name="values">
                                     <map>
-                                      <entry key="backgroundLayerName" value="ic_launcher_background" />
+                                      <entry key="backgroundLayerName" value="ic_background_main_app" />
                                       <entry key="foregroundLayerName" value="ic_launcher_foreground" />
-                                      <entry key="outputName" value="ic_switch_light" />
+                                      <entry key="outputName" value="ic_main_app" />
                                     </map>
                                   </option>
                                 </PersistentState>
