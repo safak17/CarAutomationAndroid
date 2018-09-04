@@ -4,7 +4,7 @@
     <string name="tab_item_alarm_text">Alarm</string>
     <string name="tab_item_settings_text">Ayarlar</string>
 
-    <string-array name="days_of_week">
+    <string-array name="alarm_activity_days_of_week">
         <item>Pazartesi</item>
         <item>Salı</item>
         <item>Çarşamba</item>
@@ -20,15 +20,25 @@
 
 
 
-    <string name="settings_analog_pin_temperature_label">Sıcaklık</string>
-    <string name="settings_analog_pin_current_label">Akım</string>
-    <string name="settings_analog_pin_voltage_label">Gerilim</string>
+    <string name="settings_fragment_analog_pin_temperature_label">Sıcaklık</string>
+    <string name="settings_fragment_analog_pin_current_label">Akım</string>
+    <string name="settings_fragment_analog_pin_voltage_label">Gerilim</string>
 
-    <string name="settings_seonsor" translatable="false">Ad</string>
-    <string name="settings_a_value_label" translatable="false">Çarpan</string>
-    <string name="settings_b_value_label" translatable="false">Taban</string>
+    <string name="settings_fragment_sensor_name" translatable="false">Ad</string>
+    <string name="settings_fragment_a_value_label" translatable="false">Çarpan</string>
+    <string name="settings_fragment_b_value_label" translatable="false">Taban</string>
 
-    <string name="settings_unit_label">Birim</string>
+    <string name="settings_fragment_unit_label">Birim</string>
+
+
+    <string name="alarm_activity_relay_status_deactivate">0</string>
+    <string name="alarm_activity_relay_status_activate">1</string>
+    <string name="alarm_activity_relay_status_toggle">2</string>
+    <string name="alarm_activity_relay_status_dont_care">3</string>
+
+    <string name="alarm_activity_repeat_once">0</string>
+    <string name="alarm_activity_repeat_daily">1</string>
+    <string name="alarm_activity_repeat_weekly">2</string>
 
 
 </resources>

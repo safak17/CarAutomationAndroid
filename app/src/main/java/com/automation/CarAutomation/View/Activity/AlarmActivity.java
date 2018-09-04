@@ -10,6 +10,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.automation.CarAutomation.Controller.App;
+import com.automation.CarAutomation.Model.Alarm;
 import com.automation.CarAutomation.Model.ArduinoVariableContainer;
 import com.automation.CarAutomation.Model.BluetoothContainer;
 import com.automation.CarAutomation.Model.SharedPreferencesContainer;
@@ -94,19 +95,14 @@ public class AlarmActivity extends AppCompatActivity implements TimePickerDialog
         cvSaveAlarm.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
-//                // TODO: Yeni Modele göre Güncellenecek
-                Toast.makeText(App.getContext(),"time picker",Toast.LENGTH_LONG).show();
-//                Alarm alarm         = new Alarm();
-//                alarm.id            = generateRandomAlarmID();
-//                alarm.repeat        = (cbRepeatEveryWeek.isChecked()) ? 1 : 0;
-//                alarm.dayOfWeek     = spinnerDaysOfWeek.getSelectedItemPosition() + 1;
-//                alarm.hour          = Integer.valueOf( tvAlarmTime.getText().toString().substring(0,2));
-//                alarm.minute        = Integer.valueOf( tvAlarmTime.getText().toString().substring(3));
-//                alarm.relayNumber   = spinnerRelayName.getSelectedItemPosition() + 1;
-//                alarm.relayStatus   = (cbRelayOnOff.isChecked())? 1 : 0;
-//
-//
+                Alarm alarm         = new Alarm();
+                alarm.id            = generateRandomAlarmID();
+                alarm.repeat        =
+                alarm.dayOfWeek     = spinnerDaysOfWeek.getSelectedItemPosition() + 1;
+                alarm.hour          = Integer.valueOf( tvAlarmTime.getText().toString().substring(0,2));
+                alarm.minute        = Integer.valueOf( tvAlarmTime.getText().toString().substring(3));
+                alarm.relayNumber   = spinnerRelayName.getSelectedItemPosition() + 1;
+                alarm.relayStatus   = (cbRelayOnOff.isChecked())? 1 : 0;
 //                arduinoVariableContainer.alarmList.add(alarm);
 //
 //                //  TODO: Arduino'dan gelen cevaba göre listeye eklenmesi gerekir.

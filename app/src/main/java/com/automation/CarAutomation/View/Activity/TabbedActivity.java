@@ -79,15 +79,15 @@ public class TabbedActivity extends AppCompatActivity {
 
                 stoptimertask();
 
-                if (tab.getText().equals("Dashboard")) {
-                    startTimer("pg ;", 2000);
+                if (tab.getText().equals("Panel")) {
+                    startTimer("pg ;", 3000);
                     Log.e(" TA_Dashboard", "pg ;");
                 } else if (tab.getText().equals("Alarm")) {
                     Log.e(" TA_Alarm", "al ;");
                     bluetoothContainer.bluetoothCommunicationThread.write("al ;");
                     fabAddAlarm.setVisibility(View.VISIBLE);
-                } else if (tab.getText().equals("Settıngs")) {
-                    startTimer("cg ;", 2000);
+                } else if (tab.getText().equals("Ayarlar")) {
+                    startTimer("cg ;", 3000);
                     Log.e(" TA_Settings", "cg ;");
                 }
 
@@ -116,6 +116,7 @@ public class TabbedActivity extends AppCompatActivity {
         super.onStart();
 
         mViewPager.setCurrentItem(0);
+        startTimer("pg ;", 3000);
         Log.e(" TA_onStart", String.valueOf((getSupportFragmentManager().getFragments().size())));
     }
 

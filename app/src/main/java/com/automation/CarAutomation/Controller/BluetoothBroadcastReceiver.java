@@ -48,10 +48,14 @@ public class BluetoothBroadcastReceiver extends BroadcastReceiver {
             final int state = intent.getIntExtra(BluetoothAdapter.EXTRA_STATE, BluetoothAdapter.ERROR);
             if ( state == BluetoothAdapter.STATE_OFF){
                 Log.e("BroadcastReceiver", "STATE_OFF");
+                //  putExtra( "EXIT PAIRED");
+                //  getIntent.getText() == "EXIT PAIRED" finish();
                 try {
                     bluetoothContainer.bluetoothCommunicationThread.cancel();
                 }catch (Exception e) {Log.e("BroadscastReceiver", "State_OFF_ERROR");}
                 //showActivity(context, pairedDevicesActivity);
+
+                //  TODO: PairedDeviceActivity Destroy olduysa, yeni intent yaratma.
                 Intent i = new Intent();
                 i.setClassName("com.automation.CarAutomation", pairedDevicesActivity);
                 i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK| Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_TASK_ON_HOME);

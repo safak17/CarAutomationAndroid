@@ -36,7 +36,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center|center_vertical"
                     android:layout_weight="1"
-                    android:entries="@array/days_of_week"
+                    android:entries="@array/alarm_activity_days_of_week"
                     android:spinnerMode="dropdown" />
 
                 <android.support.v7.widget.CardView
@@ -93,46 +93,63 @@
 
                     <RadioButton
                         android:id="@+id/rb_relay1_none"
+                        android:tag="@string/alarm_activity_relay_status_dont_care"
+
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
+
                         android:button="@null"
-                        android:textColor="@color/colorPrimary"
                         android:drawableBottom="?android:attr/listChoiceIndicatorSingle"
+                        android:checked="true"
+
                         android:text="@string/dashboard_default_sensor_value"
+                        android:textColor="@color/colorPrimary"
                         android:textAlignment="center" />
 
                     <RadioButton
                         android:id="@+id/rb_relay1_on"
+                        android:tag="@string/alarm_activity_relay_status_activate"
+
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
+
                         android:button="@null"
-                        android:textColor="@color/colorPrimary"
                         android:drawableBottom="?android:attr/listChoiceIndicatorSingle"
+
                         android:text="Aç"
-                        android:textAlignment="center" />
+                        android:textAlignment="center"
+                        android:textColor="@color/colorPrimary" />
 
                     <RadioButton
                         android:id="@+id/rb_relay1_off"
+                        android:tag="@string/alarm_activity_relay_status_deactivate"
+
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
+
                         android:button="@null"
-                        android:textColor="@color/colorPrimary"
                         android:drawableBottom="?android:attr/listChoiceIndicatorSingle"
+
                         android:text="Kapa"
+                        android:textColor="@color/colorPrimary"
                         android:textAlignment="center" />
 
                     <RadioButton
                         android:id="@+id/rb_relay1_toggle"
+                        android:tag="@string/alarm_activity_relay_status_toggle"
+
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
+
                         android:button="@null"
-                        android:textColor="@color/colorPrimary"
                         android:drawableBottom="?android:attr/listChoiceIndicatorSingle"
+
                         android:text="Değiş"
+                        android:textColor="@color/colorPrimary"
                         android:textAlignment="center" />
                 </RadioGroup>
 
@@ -166,39 +183,55 @@
 
                     <RadioButton
                         android:id="@+id/rb_relay2_none"
+                        android:tag="@string/alarm_activity_relay_status_dont_care"
+
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
+
                         android:button="@null"
                         android:drawableBottom="?android:attr/listChoiceIndicatorSingle"
+                        android:checked="true"
 
                         android:textAlignment="center" />
 
                     <RadioButton
                         android:id="@+id/rb_relay2_on"
+                        android:tag="@string/alarm_activity_relay_status_activate"
+
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
+
                         android:button="@null"
                         android:drawableBottom="?android:attr/listChoiceIndicatorSingle"
+
                         android:textAlignment="center" />
 
                     <RadioButton
                         android:id="@+id/rb_relay2_off"
+                        android:tag="@string/alarm_activity_relay_status_deactivate"
+
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
+
                         android:button="@null"
                         android:drawableBottom="?android:attr/listChoiceIndicatorSingle"
+
                         android:textAlignment="center" />
 
                     <RadioButton
                         android:id="@+id/rb_relay2_toggle"
+                        android:tag="@string/alarm_activity_relay_status_toggle"
+
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
+
                         android:button="@null"
                         android:drawableBottom="?android:attr/listChoiceIndicatorSingle"
+
                         android:textAlignment="center" />
                 </RadioGroup>
 
@@ -233,39 +266,55 @@
 
                     <RadioButton
                         android:id="@+id/rb_relay3_none"
+                        android:tag="@string/alarm_activity_relay_status_dont_care"
+
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
+
                         android:button="@null"
                         android:drawableBottom="?android:attr/listChoiceIndicatorSingle"
+                        android:checked="true"
 
                         android:textAlignment="center" />
 
                     <RadioButton
                         android:id="@+id/rb_relay3_on"
+                        android:tag="@string/alarm_activity_relay_status_activate"
+
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
+
                         android:button="@null"
                         android:drawableBottom="?android:attr/listChoiceIndicatorSingle"
+
                         android:textAlignment="center" />
 
                     <RadioButton
                         android:id="@+id/rb_relay3_off"
+                        android:tag="@string/alarm_activity_relay_status_deactivate"
+
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
+
                         android:button="@null"
                         android:drawableBottom="?android:attr/listChoiceIndicatorSingle"
+
                         android:textAlignment="center" />
 
                     <RadioButton
                         android:id="@+id/rb_relay3_toggle"
+                        android:tag="@string/alarm_activity_relay_status_toggle"
+
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
+
                         android:button="@null"
                         android:drawableBottom="?android:attr/listChoiceIndicatorSingle"
+
                         android:textAlignment="center" />
                 </RadioGroup>
             </LinearLayout>
@@ -300,39 +349,54 @@
 
                     <RadioButton
                         android:id="@+id/rb_relay4_none"
+                        android:tag="@string/alarm_activity_relay_status_dont_care"
+
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
+
                         android:button="@null"
                         android:drawableBottom="?android:attr/listChoiceIndicatorSingle"
+                        android:checked="true"
 
                         android:textAlignment="center" />
 
                     <RadioButton
                         android:id="@+id/rb_relay4_on"
+                        android:tag="@string/alarm_activity_relay_status_activate"
+
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
+
                         android:button="@null"
                         android:drawableBottom="?android:attr/listChoiceIndicatorSingle"
+
                         android:textAlignment="center" />
 
                     <RadioButton
                         android:id="@+id/rb_relay4_off"
+                        android:tag="@string/alarm_activity_relay_status_deactivate"
+
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
+
                         android:button="@null"
                         android:drawableBottom="?android:attr/listChoiceIndicatorSingle"
                         android:textAlignment="center" />
 
                     <RadioButton
                         android:id="@+id/rb_relay4_toggle"
+                        android:tag="@string/alarm_activity_relay_status_toggle"
+
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
+
                         android:button="@null"
                         android:drawableBottom="?android:attr/listChoiceIndicatorSingle"
+
                         android:textAlignment="center" />
                 </RadioGroup>
 
@@ -367,36 +431,48 @@
 
                     <RadioButton
                         android:id="@+id/rb_repeat_none"
+                        android:tag="@string/alarm_activity_repeat_once"
+
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:button="@null"
-                        android:textColor="@color/colorPrimary"
 
+                        android:button="@null"
+                        android:checked="true"
                         android:drawableBottom="?android:attr/listChoiceIndicatorSingle"
+
                         android:text="Yok"
+                        android:textColor="@color/colorPrimary"
                         android:textAlignment="center" />
 
                     <RadioButton
                         android:id="@+id/rb_repeat_daily"
+                        android:tag="@string/alarm_activity_repeat_daily"
+
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:textColor="@color/colorPrimary"
+
                         android:button="@null"
                         android:drawableBottom="?android:attr/listChoiceIndicatorSingle"
+
                         android:text="Günlük"
+                        android:textColor="@color/colorPrimary"
                         android:textAlignment="center" />
 
                     <RadioButton
                         android:id="@+id/rb_repeat_weekly"
+                        android:tag="@string/alarm_activity_repeat_weekly"
+
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:button="@null"  android:textColor="@color/colorPrimary"
 
+                        android:button="@null"
                         android:drawableBottom="?android:attr/listChoiceIndicatorSingle"
+
                         android:text="Haftalık"
+                        android:textColor="@color/colorPrimary"
                         android:textAlignment="center" />
                 </RadioGroup>
             </LinearLayout>
