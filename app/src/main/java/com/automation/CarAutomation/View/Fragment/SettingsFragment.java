@@ -62,6 +62,8 @@ public class SettingsFragment extends Fragment {public SettingsFragment() { }
 
     public void syncRealtimeClock() {
 
+        //  TODO:   unixtime almayı bir dene.
+        //  TODO:   Gün, Pazar'dan başlıyor 1.
         Calendar calendar = Calendar.getInstance();
 
         String setClockMessage = "cs "
@@ -119,18 +121,9 @@ public class SettingsFragment extends Fragment {public SettingsFragment() { }
             editText.setOnFocusChangeListener(new View.OnFocusChangeListener() {
                 @Override
                 public void onFocusChange(View view, boolean focus) {
-                    if(!focus) {
 
-                        String sharedPreferencesKey = String.valueOf(editText.getTag());
-                        String editTextStringValue  = editText.getText().toString();
+                    if(!focus)  sharedPreferencesContainer.set_peripheral(editText.getTag().toString(), editText.getText().toString());
 
-                        if( editText.getTag().toString().startsWith("unit"))
-                            sharedPreferencesContainer.editor.putString( sharedPreferencesKey, editTextStringValue);
-                        else
-                            sharedPreferencesContainer.editor.putFloat( sharedPreferencesKey, Float.valueOf(editText.getText().toString()));
-
-                        sharedPreferencesContainer.editor.commit();
-                    }
                 }
             });
     }

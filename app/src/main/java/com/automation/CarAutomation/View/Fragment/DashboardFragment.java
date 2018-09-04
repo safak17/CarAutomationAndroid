@@ -1,12 +1,9 @@
 package com.automation.CarAutomation.View.Fragment;
 
-import android.app.Activity;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentActivity;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.SwitchCompat;
 import android.text.TextUtils;
@@ -17,12 +14,11 @@ import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
-
-import com.automation.CarAutomation.Controller.App;
-import com.automation.CarAutomation.Controller.TimerController;
 import com.automation.CarAutomation.Model.BluetoothContainer;
 import com.automation.CarAutomation.Model.SharedPreferencesContainer;
 import com.automation.CarAutomation.R;
+
+import org.w3c.dom.Text;
 
 
 public class DashboardFragment extends Fragment {
@@ -105,47 +101,51 @@ public class DashboardFragment extends Fragment {
     } // initSwitchCompatOfRelays()
 
     private void initTextViewOfRelays() {
-        for (int textViewId = R.id.tv_relay_1; textViewId <= R.id.tv_relay_4; textViewId++) {
 
-            TextView textView = rootView.findViewById( textViewId );
+        final TextView relay1     =   (TextView)rootView.findViewById(R.id.tv_relay_1);
+        relay1.setText(sharedPreferencesContainer.get_name_of_relay("1"));
+        relay1.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View view) {
+                displayAlertDialogForEditingRelayLabel("1");
+                return true;
+            }
+        });
 
-            final int finalTextViewId = textViewId;
-            textView.setOnLongClickListener(new View.OnLongClickListener() {
-                @Override
-                public boolean onLongClick(View view) {
-                    displayAlertDialogForEditingRelayLabel( finalTextViewId );
-                    return true;
-                }
-            });
-        }
+        final TextView relay2     =   (TextView)rootView.findViewById(R.id.tv_relay_2);
+        relay2.setText(sharedPreferencesContainer.get_name_of_relay("2"));
+        relay2.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View view) {
+                displayAlertDialogForEditingRelayLabel("2");
+                return true;
+            }
+        });
 
-        setRelaysTextView();
+        final TextView relay3     =   (TextView)rootView.findViewById(R.id.tv_relay_3);
+        relay3.setText(sharedPreferencesContainer.get_name_of_relay("3"));
+        relay3.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View view) {
+                displayAlertDialogForEditingRelayLabel("3");
+                return true;
+            }
+        });
+
+        final TextView relay4     =   (TextView)rootView.findViewById(R.id.tv_relay_4);
+        relay4.setText(sharedPreferencesContainer.get_name_of_relay("4"));
+        relay4.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View view) {
+                displayAlertDialogForEditingRelayLabel("4");
+                return true;
+            }
+        });
+
     }// initTextViewOfRelays
 
-    public void setRelaysTextView() {
 
-        //  TODO: getId ne döndürüyor dene.
-        for (int textViewId = R.id.tv_relay_1; textViewId <= R.id.tv_relay_4; textViewId++) {
-
-            TextView tvRelayLabel           = rootView.findViewById( textViewId );
-            String sharedPreferenceKey      = String.valueOf( textViewId );
-            String sharedPreferenceValue    = sharedPreferencesContainer.settings.getString(sharedPreferenceKey, null);
-
-            if( TextUtils.isEmpty(sharedPreferenceValue) ){
-                sharedPreferencesContainer.editor.putString(sharedPreferenceKey, tvRelayLabel.getText().toString());
-                sharedPreferencesContainer.editor.commit();
-            }
-
-            else
-                tvRelayLabel.setText( sharedPreferencesContainer.settings.getString(sharedPreferenceKey, null) );
-
-        }
-
-    }// setRelaysTextView()
-
-
-
-    private void displayAlertDialogForEditingRelayLabel(final int relayTextViewId)
+    private void displayAlertDialogForEditingRelayLabel(final String relayNumber)
     {
 
         final EditText etRelayLabel = new EditText( getContext() );
@@ -165,12 +165,10 @@ public class DashboardFragment extends Fragment {
                             Toast.makeText( getContext(), "Enter Label Name !", Toast.LENGTH_LONG).show();
 
                         else {
-                            sharedPreferencesContainer.editor.putString(String.valueOf(relayTextViewId), newLabel);
-                            sharedPreferencesContainer.editor.apply();
 
+                            sharedPreferencesContainer.set_name_of_relay(relayNumber, newLabel);
+                            initTextViewOfRelays();
                             Toast.makeText( getContext(), "Saved Successfully", Toast.LENGTH_LONG).show();
-                            ((TextView)rootView.findViewById( relayTextViewId )).setText(newLabel);
-                            setRelaysTextView();
                             dialog.dismiss();
                         }
                     }});

@@ -16,6 +16,25 @@ public class SharedPreferencesContainer extends AppCompatActivity {
     public SharedPreferences settings;
     public SharedPreferences.Editor editor;
 
+
+
+    public void set_name_of_relay(String relayNumber, String name){
+        editor.putString("name_relay"+relayNumber, name);
+        editor.commit();
+    }
+
+    public String get_name_of_relay(String relayNumber){
+        return settings.getString("name_relay"+relayNumber, "röle"+relayNumber);
+    }
+
+    public void set_peripheral(String peripheralName, String value ){
+
+        if(peripheralName.startsWith("unit"))   editor.putString(peripheralName, value);
+        else                                    editor.putFloat(peripheralName, Float.valueOf(value));
+
+        editor.commit();
+    }
+
     public Float get_a_value_of(String peripheralName){
         if(peripheralName.equals("temperature"))    return settings.getFloat("a_value_temperature", 1.00f);
         if(peripheralName.equals("current"))        return settings.getFloat("a_value_current", 1.00f);

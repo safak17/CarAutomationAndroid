@@ -312,26 +312,26 @@ public class TabbedActivity extends AppCompatActivity {
                             } else if (command.startsWith("ALARM_TRIGGERED")) {
                                 int triggeredAlarmId = CommandParser.getTriggeredAlarmId(command);
 
-                                for (Alarm alarm : arduinoVariableContainer.alarmList)
-                                    if (alarm.id == triggeredAlarmId && alarm.repeat != 1) {
-                                        arduinoVariableContainer.alarmList.remove(alarm);
-                                        sharedPreferencesContainer.editor.remove(String.valueOf("alarmId" + triggeredAlarmId));
-                                        sharedPreferencesContainer.editor.commit();
-                                        break;
-                                    }
+//                                for (Alarm alarm : arduinoVariableContainer.alarmList)
+//                                    if (alarm.id == triggeredAlarmId && alarm.repeat != 1) {
+//                                        arduinoVariableContainer.alarmList.remove(alarm);
+//                                        sharedPreferencesContainer.editor.remove(String.valueOf("alarmId" + triggeredAlarmId));
+//                                        sharedPreferencesContainer.editor.commit();
+//                                        break;
+//                                    }
 
                                 UpdateAlarmUI();
                             } else if (command.startsWith("ALARM_DISARM")) {
 
                                 int alarmID = CommandParser.getDisarmAlarmId(command);
 
-                                for (Alarm alarm : arduinoVariableContainer.alarmList)
-                                    if (alarm.id == alarmID) {
-                                        arduinoVariableContainer.alarmList.remove(alarm);
-                                        sharedPreferencesContainer.editor.remove(String.valueOf("alarmId" + alarmID));
-                                        sharedPreferencesContainer.editor.commit();
-                                        break;
-                                    }
+//                                for (Alarm alarm : arduinoVariableContainer.alarmList)
+//                                    if (alarm.id == alarmID) {
+//                                        arduinoVariableContainer.alarmList.remove(alarm);
+//                                        sharedPreferencesContainer.editor.remove(String.valueOf("alarmId" + alarmID));
+//                                        sharedPreferencesContainer.editor.commit();
+//                                        break;
+//                                    }
 
                                 UpdateAlarmUI();
 
