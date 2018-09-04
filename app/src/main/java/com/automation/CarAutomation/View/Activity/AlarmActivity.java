@@ -3,6 +3,7 @@ package com.automation.CarAutomation.View.Activity;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.CardView;
+import android.util.Log;
 import android.view.View;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
@@ -107,6 +108,7 @@ public class AlarmActivity extends AppCompatActivity implements TimePickerDialog
 
                 try {
                     bluetoothContainer.bluetoothCommunicationThread.write(alarm.getAlarmSetCommand());
+                    Log.e(" AA_alarmDescription", alarm.getAlarmSetCommand());
                     Toast.makeText(getBaseContext(), "Alarm Saved Successfully", Toast.LENGTH_SHORT).show();
                     finish();
                 }catch (Exception e){ }

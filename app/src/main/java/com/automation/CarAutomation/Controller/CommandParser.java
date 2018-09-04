@@ -37,10 +37,10 @@ public class CommandParser {
         return Integer.valueOf(alarmListSize);
     }
 
-    // alarmListItemResponse            = "ALARM_LIST_ITEM alarm_ID repeat day_of_week hour minute relay_number relay_status"
-    public static String getAlarmListItemData(String alarmListItemResponse) {
-        int indexOfAlarmId = alarmListItemResponse.indexOf(" ") + 1;
-        String alarmListItemData = alarmListItemResponse.substring(indexOfAlarmId);                 //  "ALARM_LIST_ITEM " is trimmed.
+    // alarmListItemResponse            = "ALARM_LIST_ITEM alarmDescription"
+    public static long getAlarmListItemData(String alarmListItemResponse) {
+        int indexOfAlarmDescription = alarmListItemResponse.indexOf(" ") + 1;
+        long alarmListItemData = Long.valueOf(alarmListItemResponse.substring(indexOfAlarmDescription));                 //  "ALARM_LIST_ITEM " is trimmed.
         return alarmListItemData;
     }
 

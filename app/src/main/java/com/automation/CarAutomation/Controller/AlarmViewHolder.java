@@ -59,6 +59,9 @@ public class AlarmViewHolder extends RecyclerView.ViewHolder implements View.OnC
     public void setUserInterfaceData(Alarm alarmItem) {
         String dateTimeInformation  =   alarmItem.getDateTimeInformation();
         String relayInformation     =   alarmItem.getRelayInformation();
+
+        tvDateTimeInformation.setText( dateTimeInformation );
+        tvAlarmRelayInformation.setText( relayInformation );
     }
 
 

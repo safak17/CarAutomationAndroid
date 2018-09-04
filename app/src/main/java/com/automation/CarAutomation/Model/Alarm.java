@@ -32,16 +32,6 @@ public class Alarm {
 
 
     private long alarmDescription;
-    private long id;
-    private long enable;
-    private long relay4;
-    private long relay3;
-    private long relay2;
-    private long relay1;
-    private long repeat;
-    private long minute;
-    private long hour;
-    private long dayOfWeek;
 
     public Alarm(){}
 
@@ -56,11 +46,11 @@ public class Alarm {
     }
 
     public String getAlarmDisarmCommand(){
-        return "ad " + id + " ;";
+        return "ad " + id() + " ;";
     }
 
     public String getDigitalClockFormat() {
-        return String.format(Locale.getDefault(), "%02d:%02d", hour, minute);
+        return String.format(Locale.getDefault(), "%02d:%02d", hour(), minute());
     }
 
     public long id()                {  return ( alarmDescription & MASK_ALARM_ID  ) / DIGIT_VALUE_ID ; }
@@ -141,22 +131,22 @@ public class Alarm {
     }
 
     public String getRepeatText(){
-        if( repeat == 0 ) return "Bir kez";
-        if( repeat == 1 ) return "Günlük";
-        if( repeat == 2 ) return "Haftalık";
+        if( repeat() == 0 ) return "Bir kez";
+        if( repeat() == 1 ) return "Günlük";
+        if( repeat() == 2 ) return "Haftalık";
 
         return "-1";
     }
 
     public String getAlarmDay() {
 
-        if( dayOfWeek == 1 )    return "Pazartesi";
-        if( dayOfWeek == 2 )    return "Salı";
-        if( dayOfWeek == 3 )    return "Çarşamba";
-        if( dayOfWeek == 4 )    return "Perşembe";
-        if( dayOfWeek == 5 )    return "Cuma";
-        if( dayOfWeek == 6 )    return "Cumartesi";
-        if( dayOfWeek == 7 )    return "Pazar";
+        if( dayWeek() == 1 )    return "Pazartesi";
+        if( dayWeek() == 2 )    return "Salı";
+        if( dayWeek() == 3 )    return "Çarşamba";
+        if( dayWeek() == 4 )    return "Perşembe";
+        if( dayWeek() == 5 )    return "Cuma";
+        if( dayWeek() == 6 )    return "Cumartesi";
+        if( dayWeek() == 7 )    return "Pazar";
 
         return "";
     }
@@ -176,18 +166,18 @@ public class Alarm {
     }
 
     private String getInformationOfRelay(String relayNumber){
-        if( relayNumber.equals("1"))    return getRelayText(relay1);
-        if( relayNumber.equals("2"))    return getRelayText(relay2);
-        if( relayNumber.equals("3"))    return getRelayText(relay3);
-        if( relayNumber.equals("4"))    return getRelayText(relay4);
+        if( relayNumber.equals("1"))    return getRelayText(relay1());
+        if( relayNumber.equals("2"))    return getRelayText(relay2());
+        if( relayNumber.equals("3"))    return getRelayText(relay3());
+        if( relayNumber.equals("4"))    return getRelayText(relay4());
 
         return "";
     }
 
     private String getRelayText(long relayStatus){
-        if( relayStatus == 0)   return "KAPA";
-        if( relayStatus == 1)   return "AÇ";
-        if( relayStatus == 2)   return "DEĞİŞ";
+        if( relayStatus == 0)   return "Kapa";
+        if( relayStatus == 1)   return "Aç";
+        if( relayStatus == 2)   return "Değiş";
         if( relayStatus == 3)   return "-";
 
         return "";

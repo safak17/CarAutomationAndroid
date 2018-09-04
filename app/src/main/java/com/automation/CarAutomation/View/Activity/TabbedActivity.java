@@ -18,6 +18,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Handler;
 import android.os.Message;
+import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.TabLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
@@ -28,6 +29,7 @@ import android.support.v4.view.ViewPager;
 import android.os.Bundle;
 import android.support.v7.widget.SwitchCompat;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.View;
 
 import java.util.Locale;
@@ -61,6 +63,22 @@ public class TabbedActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Intent intent = new Intent(TabbedActivity.this, AlarmActivity.class);
                 startActivity(intent);
+            }
+        });
+
+        fabAddAlarm.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View view) {
+
+                CoordinatorLayout.LayoutParams params = (CoordinatorLayout.LayoutParams)fabAddAlarm.getLayoutParams();
+
+                if( params.gravity == (Gravity.LEFT | Gravity.BOTTOM) )
+                    params.gravity = Gravity.RIGHT | Gravity.BOTTOM;
+                else
+                    params.gravity = Gravity.LEFT | Gravity.BOTTOM;
+
+                fabAddAlarm.setLayoutParams(params);
+                return true;
             }
         });
 
@@ -115,8 +133,8 @@ public class TabbedActivity extends AppCompatActivity {
     protected void onStart() {
         super.onStart();
 
-        mViewPager.setCurrentItem(0);
-        startTimer("pg ;", 3000);
+        //  mViewPager.setCurrentItem(0);
+        //  startTimer("pg ;", 3000);
         Log.e(" TA_onStart", String.valueOf((getSupportFragmentManager().getFragments().size())));
     }
 
